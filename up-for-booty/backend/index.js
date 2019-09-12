@@ -8,9 +8,9 @@ mongoose.set('useUnifiedTopology', true);
 
 const app = express();
 app.use(express.json());
+const uri = 'mongodb+srv://anders:SUDEUI3HWiQPuy62@bootycluster-iu6xq.mongodb.net/test?retryWrites=true'
 
-// TODO: Add database connection
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(uri);
 global.connection = mongoose.connection;
 connection.on('error', () => console.log('Could not connect to DB'));
 connection.once('open', () => {
