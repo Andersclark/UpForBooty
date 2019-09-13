@@ -5,8 +5,6 @@ export default class AddBooty extends Component {
   constructor(props) {
     super(props);
 
-    this.onSubmit = this.onSubmit.bind(this);
-
     this.state = {
       firstName: '',
       lastName: '',
@@ -15,8 +13,14 @@ export default class AddBooty extends Component {
       email: '',
       city: '',
       country: '',
-      timezone: ''
-    }
+      timezone: '',
+      validate: {
+        emailState: '',
+        phoneNoState: ''
+      }
+    };
+
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -29,8 +33,29 @@ export default class AddBooty extends Component {
     this.setState({ [nam]: val });
   }
 
+  validateEmail(e) {
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const { validate } = this.state;
+    if (emailRegex.test(e.target.value)) {
+      validate.emailState = 'has-success'
+    } else {
+      validate.emailState = 'has-fail'
+    }
+    this.setState({ validate })
+  }
+
+  validatePhoneNo(e) {
+    const phoneRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4,})$/;
+    const { validate } = this.state;
+    if(phoneRegex.test(e.target.value)) {
+      validate.phoneNoState = 'has-success'
+    }  
+    else {  
+      validate.phoneNoState = 'has-fail'      
+    }
+  }
+
   onSubmit(e) {
-    console.log('started submit');
     e.preventDefault();
 
     const booty = {
@@ -46,19 +71,18 @@ export default class AddBooty extends Component {
 
     console.log('submitted ', booty)
 
-    //window.location = '/';
+    window.location = '/';
   }
 
   render() {
     return (
       <Container className="App">
         <h2>Add a booty!</h2>
-        <Form className="form">
+        <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
           <Col>
             <FormGroup>
               <Label>First name: </Label>
-              <Input
-                type="text"
+              <Input type="text"
                 required
                 name='firstName'
                 className="form-control"
@@ -71,8 +95,7 @@ export default class AddBooty extends Component {
           <Col>
             <FormGroup>
               <Label>Last name: </Label>
-              <Input
-                type="text"
+              <Input type="text"
                 required
                 name="lastName"
                 className="form-control"
@@ -98,13 +121,35 @@ export default class AddBooty extends Component {
           <Col>
             <FormGroup>
               <Label>Email address: </Label>
-              <Input
-                type="text"
+              <Input type="text"
                 required
                 name="email"
                 className="form-control"
                 value={this.state.email}
-                onChange={this.onChangeHandler}
+                valid={ this.state.validate.emailState === 'has-success' }
+                invalid={ this.state.validate.emailState === 'has-fail' }
+                onChange={(e) => {
+                  this.validateEmail(e)
+                  this.onChangeHandler(e)
+                }}
+              />
+            </FormGroup>
+          </Col>
+
+          <Col>
+            <FormGroup>
+              <Label>Phone number: </Label>
+              <Input type="text"
+                required
+                name="phoneNo"
+                className="form-control"
+                value={this.state.phoneNo}
+                valid={ this.state.validate.phoneNoState === 'has-success' }
+                invalid={ this.state.validate.phoneNoState === 'has-fail' }
+                onChange={(e) => {
+                  this.validatePhoneNo(e)
+                  this.onChangeHandler(e)
+                }}
               />
             </FormGroup>
           </Col>
@@ -112,8 +157,7 @@ export default class AddBooty extends Component {
           <Col>
             <FormGroup>
               <Label>City: </Label>
-              <Input
-                type="text"
+              <Input type="text"
                 required
                 name="city"
                 className="form-control"
@@ -126,8 +170,7 @@ export default class AddBooty extends Component {
           <Col>
             <FormGroup>
               <Label>Country: </Label>
-              <Input
-                type="text"
+              <Input type="text"
                 required
                 name="country"
                 className="form-control"
@@ -140,8 +183,7 @@ export default class AddBooty extends Component {
           <Col>
             <FormGroup>
               <Label>Timezone: </Label>
-              <Input
-                type="text"
+              <Input type="text"
                 required
                 name="timezone"
                 className="form-control"
@@ -151,18 +193,9 @@ export default class AddBooty extends Component {
             </FormGroup>
           </Col>
 
-          <Button onSubmit={this.onSubmit}>Add that booty</Button>
+          <Button>Add that booty</Button>
         </Form>
       </Container>
     );
   }
 }
-/*
-          <div className="form-group">
-            <Input type="submit" value="Add booty!" className="btn btn-primary" />
-          </div>
-        </form>
-      </div>
-    )
-  }
-} */
