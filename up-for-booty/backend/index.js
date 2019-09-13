@@ -17,6 +17,9 @@ connection.once('open', () => {
     console.log('Connected to DB')
 });
 
+const bootyRouter = require('./routes/booty');
+app.use('/booty', bootyRouter);
+
 app.listen(5000, () => {
   console.log(' Server is running on port: 5000');
 });

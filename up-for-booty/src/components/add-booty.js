@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
+import axios from 'axios';
 import '../App.css';
+
 
 export default class AddBooty extends Component {
   constructor(props) {
@@ -24,9 +26,9 @@ export default class AddBooty extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidMount() {
+  /* componentDidMount() {
     console.log('add booty mounted!')
-  }
+  } */
 
   onChangeHandler = (event) => {
     let nam = event.target.name;
@@ -69,6 +71,9 @@ export default class AddBooty extends Component {
       country: this.state.country,
       timezone: this.state.timezone
     };
+
+    axios.post('http://localhost:5000/booty/add', booty)
+      .then(res => console.log(res.data));
 
     console.log('submitted ', booty)
 
