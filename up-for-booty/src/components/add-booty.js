@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Col, Form, FormGroup, Label, Button, Input } from 'reactstrap';
+import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
+import '../App.css';
 
 export default class AddBooty extends Component {
   constructor(props) {
@@ -47,11 +48,11 @@ export default class AddBooty extends Component {
   validatePhoneNo(e) {
     const phoneRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4,})$/;
     const { validate } = this.state;
-    if(phoneRegex.test(e.target.value)) {
+    if (phoneRegex.test(e.target.value)) {
       validate.phoneNoState = 'has-success'
-    }  
-    else {  
-      validate.phoneNoState = 'has-fail'      
+    }
+    else {
+      validate.phoneNoState = 'has-fail'
     }
   }
 
@@ -79,55 +80,45 @@ export default class AddBooty extends Component {
       <Container className="App">
         <h2>Add a booty!</h2>
         <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
-          <Col>
-            <FormGroup>
-              <Label>First name: </Label>
-              <Input type="text"
-                required
-                name='firstName'
-                className="form-control"
-                value={this.state.firstName}
-                onChange={this.onChangeHandler}
-              />
-            </FormGroup>
-          </Col>
+          <Row form>
+            <Col className="colStyle">
+              <FormGroup>
+                <Label>First name: </Label>
+                <Input type="text" required name='firstName' className="form-control"
+                  value={this.state.firstName}
+                  onChange={this.onChangeHandler}
+                />
+              </FormGroup>
+            </Col>
 
-          <Col>
-            <FormGroup>
-              <Label>Last name: </Label>
-              <Input type="text"
-                required
-                name="lastName"
-                className="form-control"
-                value={this.state.lastName}
-                onChange={this.onChangeHandler}
-              />
-            </FormGroup>
-          </Col>
+            <Col className="colStyle">
+              <FormGroup>
+                <Label>Last name: </Label>
+                <Input type="text" required name="lastName" className="form-control"
+                  value={this.state.lastName}
+                  onChange={this.onChangeHandler}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-          <Col>
+          <Col className="colStyle">
             <FormGroup>
               <Label>Skype handle: </Label>
-              <Input type="text"
-                required
-                name="skypeHandle"
-                className="form-control"
+              <Input type="text" required name="skypeHandle" className="form-control"
                 value={this.state.skypeHandle}
                 onChange={this.onChangeHandler}
               />
             </FormGroup>
           </Col>
 
-          <Col>
+          <Col className="colStyle">
             <FormGroup>
               <Label>Email address: </Label>
-              <Input type="text"
-                required
-                name="email"
-                className="form-control"
+              <Input type="text" required name="email" className="form-control"
                 value={this.state.email}
-                valid={ this.state.validate.emailState === 'has-success' }
-                invalid={ this.state.validate.emailState === 'has-fail' }
+                valid={this.state.validate.emailState === 'has-success'}
+                invalid={this.state.validate.emailState === 'has-fail'}
                 onChange={(e) => {
                   this.validateEmail(e)
                   this.onChangeHandler(e)
@@ -136,16 +127,13 @@ export default class AddBooty extends Component {
             </FormGroup>
           </Col>
 
-          <Col>
+          <Col className="colStyle">
             <FormGroup>
               <Label>Phone number: </Label>
-              <Input type="text"
-                required
-                name="phoneNo"
-                className="form-control"
+              <Input type="text" required name="phoneNo" className="form-control"
                 value={this.state.phoneNo}
-                valid={ this.state.validate.phoneNoState === 'has-success' }
-                invalid={ this.state.validate.phoneNoState === 'has-fail' }
+                valid={this.state.validate.phoneNoState === 'has-success'}
+                invalid={this.state.validate.phoneNoState === 'has-fail'}
                 onChange={(e) => {
                   this.validatePhoneNo(e)
                   this.onChangeHandler(e)
@@ -154,42 +142,40 @@ export default class AddBooty extends Component {
             </FormGroup>
           </Col>
 
-          <Col>
-            <FormGroup>
-              <Label>City: </Label>
-              <Input type="text"
-                required
-                name="city"
-                className="form-control"
-                value={this.state.city}
-                onChange={this.onChangeHandler}
-              />
-            </FormGroup>
-          </Col>
+          <Row form>
+            <Col md={6}>
+              <FormGroup>
+                <Label>City: </Label>
+                <Input type="text" required name="city" className="form-control"
+                  value={this.state.city}
+                  onChange={this.onChangeHandler}
+                />
+              </FormGroup>
+            </Col>
 
-          <Col>
-            <FormGroup>
-              <Label>Country: </Label>
-              <Input type="text"
-                required
-                name="country"
-                className="form-control"
-                value={this.state.country}
-                onChange={this.onChangeHandler}
-              />
-            </FormGroup>
-          </Col>
+            <Col>
+              <FormGroup>
+                <Label>Country: </Label>
+                <Input type="text" required name="country" className="form-control"
+                  value={this.state.country}
+                  onChange={this.onChangeHandler}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
-          <Col>
+          <Col className="colStyle">
             <FormGroup>
-              <Label>Timezone: </Label>
-              <Input type="text"
-                required
-                name="timezone"
-                className="form-control"
+              <Label>Timezone</Label>
+              <Input type="select" required name="timezone" className="form-control"
                 value={this.state.timezone}
-                onChange={this.onChangeHandler}
-              />
+                onChange={this.onChangeHandler}>
+                <option>time 1</option>
+                <option>time 2</option>
+                <option>time 3</option>
+                <option>time 4</option>
+                <option>time 5</option>
+              </Input>
             </FormGroup>
           </Col>
 
