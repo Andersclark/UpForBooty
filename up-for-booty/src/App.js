@@ -1,13 +1,20 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Navbar from "./components/navbar";
+import BootyList from "./components/booty-list";
+import AddBooty from "./components/add-booty";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Looking for booty?</h1>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+        <Navbar />
+        <br />
+        <Route path="/" exact component={BootyList} />
+        <Route path="/add" component={AddBooty} />
+      </div>
+    </Router>
   );
 }
 
