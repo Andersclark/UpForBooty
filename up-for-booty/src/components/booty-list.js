@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const Booty = props => (
   <tr>
-    <td>{props.booty.firstName}</td>
-    <td>{props.booty.lastName}</td>
+    <td>{props.booty.firstName} {props.booty.lastName}</td>
+    <td>{props.booty.timezone}</td>
     <td>
       <Link to={"/view/"+props.booty._id}>View details</Link>
     </td>
@@ -17,6 +17,16 @@ export default class BootyList extends Component {
     super(props);
 
     this.state = {booties: []};
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/booty/')
+      .then(response => {
+        this.setState({ booties: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   bootyList() {
