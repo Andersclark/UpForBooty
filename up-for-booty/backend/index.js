@@ -5,12 +5,12 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-const Person = require('./mongoose-models/Person');
+const Person = require('./models/Booty');
 
 const app = express();
 app.use(express.json());
 
-const uri = 'mongodb+srv://anders:SUDEUI3HWiQPuy62@bootycluster-iu6xq.mongodb.net/test?retryWrites=true';
+const uri = 'mongodb+srv://anders:SUDEUI3HWiQPuy62@bootycluster-iu6xq.mongodb.net/UpForBooty?retryWrites=true';
 mongoose.connect(uri);
 global.db = mongoose.connection;
 
