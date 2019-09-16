@@ -22,6 +22,7 @@ export default class BootyList extends Component {
   componentDidMount() {
     axios.get('http://localhost:5000/booty/')
       .then(response => {
+        console.log(response.data)
         this.setState({ booties: response.data })
       })
       .catch((error) => {
