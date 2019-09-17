@@ -21,7 +21,7 @@ export default class BootyDetails extends Component {
   render() {
     const bootyDeets = this.state.booty ? (
       <div className="bootyDeets">
-        <h4>{this.state.booty.firstName} {this.state.booty.firstName}</h4>
+        <h4>{this.state.booty.firstName} {this.state.booty.lastName}</h4>
         <p>{this.state.booty.phoneNo}</p>
         <p>{this.state.booty.skypeHandle}</p>
         <p>{this.state.booty.email}</p>
