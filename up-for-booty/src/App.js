@@ -5,6 +5,7 @@ import Navbar from "./components/navbar";
 import BootyList from "./components/booty-list";
 import AddBooty from "./components/add-booty";
 import BootyDetails from "./components/booty-details";
+import EditBootyDetails from "./components/edit-booty-details";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" exact component={BootyList} />
         <Route path="/add" component={AddBooty} />
         <Route path="/view/:id" component={BootyDetails} />
+        <Route path="/edit/:id" component={EditBootyDetails} />
       </div>
     </Router>
   );

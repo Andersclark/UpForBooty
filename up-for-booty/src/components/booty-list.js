@@ -7,7 +7,9 @@ const Booty = props => (
     <td>{props.booty.firstName} {props.booty.lastName}</td>
     <td>{props.booty.timezone}</td>
     <td>
-      <Link to={"/view/"+props.booty._id}>View details</Link>
+      <span><Link to={"/view/" + props.booty._id}>View details</Link> </span>
+      <span><Link to={"/edit/" + props.booty._id}>Edit</Link> </span>
+      <span>Delete</span>
     </td>
   </tr>
 )
@@ -16,7 +18,7 @@ export default class BootyList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {booties: []};
+    this.state = { booties: [] };
   }
 
   componentDidMount() {
@@ -32,7 +34,7 @@ export default class BootyList extends Component {
 
   bootyList() {
     return this.state.booties.map(currentBooty => {
-      return <Booty booty={currentBooty} key={currentBooty._id}/>;
+      return <Booty booty={currentBooty} key={currentBooty._id} />;
     })
   }
 
@@ -48,7 +50,7 @@ export default class BootyList extends Component {
             </tr>
           </thead>
           <tbody>
-            { this.bootyList() }
+            {this.bootyList()}
           </tbody>
         </table>
       </div>
