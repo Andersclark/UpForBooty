@@ -20,6 +20,14 @@
   padding: 0px 5px;
 }
 
+.errorMsg {
+  color: red;
+}
+
+#errorEmail, #errorPhone {
+  display: none;
+}
+
 label {
   display: flex;
   font-weight: 600;
