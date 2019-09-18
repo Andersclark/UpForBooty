@@ -3,7 +3,7 @@ import BootyList from './components/booty-list';
 import SearchField from './components/search-field';
 import axios from 'axios';
 import store from "./store";
-import moment from 'moment-timezone'
+import moment from 'moment-timezone';
 
 export default class HomePage extends Component {
     constructor(props) {
