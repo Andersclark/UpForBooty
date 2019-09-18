@@ -20,8 +20,6 @@ export default class HomePage extends Component {
             .catch((error) => {
                 console.log(error);
             });
-
-        console.log("läser in db och sparar till store");
     }
 
     searchCallback = (searchData) => {
