@@ -8,12 +8,14 @@ export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.readFromDB();
+        this.state = {booties: []};
     }
 
     readFromDB() {
         axios.get('http://localhost:5000/booty/')
             .then(response => {
                 store.saveToBooties(response.data)
+                this.setState({booties: response.data})
             })
             .catch((error) => {
                 console.log(error);
@@ -22,11 +24,15 @@ export default class HomePage extends Component {
         console.log("läser in db och sparar till store");
     }
 
-    render() {
+    searchCallback = (searchData) => {
+        this.setState({search: searchData })
+    }
+
+    render() {       
         return (
             <div>
-                <SearchField></SearchField>
-                <BootyList></BootyList>
+                <SearchField searchCallback = {this.searchCallback} ></SearchField>
+                <BootyList list = {this.state.search ? this.state.search: this.state.booties} ></BootyList>
             </div>
         )
     }
