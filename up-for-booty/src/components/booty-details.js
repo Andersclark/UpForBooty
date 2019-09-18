@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 export default class BootyDetails extends Component {
   constructor(props) {
@@ -12,6 +13,9 @@ export default class BootyDetails extends Component {
     axios.get('http://localhost:5000/booty/view/' + this.props.match.params.id)
       .then(response => {
         this.setState({ booty: response.data })
+/*         let time = moment.tz(this.state.booty.timezone)
+        bootyObj = {...this.state.booty, time};
+        this.setState({bootyObj})  */
       })
       .catch((error) => {
         console.log(error);
@@ -19,22 +23,16 @@ export default class BootyDetails extends Component {
   }
 
   render() {
-    const bootyDeets = this.state.booty ? (
-      <div className="bootyDeets">
-        <h4>{this.state.booty.firstName} {this.state.booty.firstName}</h4>
-        <p>{this.state.booty.phoneNo}</p>
-        <p>{this.state.booty.skypeHandle}</p>
-        <p>{this.state.booty.email}</p>
-        <p>{this.state.booty.city}</p>
-        <p>{this.state.booty.country}</p>
-        <p>{this.state.booty.timezone}</p>
-      </div>
-    ) :
-      (console.log('loading page'))
-
     return (
       <div className="container">
-        {bootyDeets}
+         <div className="bootyDeets">
+        <h4>{this.state.booty.firstName} {this.state.booty.firstName}</h4>
+        <p><i className="fas fa-phone-alt fontawesome"></i>Phone number: {this.state.booty.phoneNo}</p>
+        <a href="https://www.skype.com/sv/"><p><i className="fab fa-skype fontawesome"></i>Skype handle: {this.state.booty.skypeHandle}</p></a>
+        <p><i className="far fa-envelope-open fontawesome"></i>Email: {this.state.booty.email}</p>
+        <p><i className="fas fa-home fontawesome"></i>Location: {this.state.booty.city}, {this.state.booty.country}</p>
+        <p><i className="fas fa-clock fontawesome"></i>Timezone: {this.state.booty.timezone}</p>
+      </div>
       </div>
     );
   }
