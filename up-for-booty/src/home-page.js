@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BootyList from './components/booty-list';
 import SearchField from './components/search-field';
+import TimezoneDropdown from './components/timezone-dropdown';
 import axios from 'axios';
 import store from "./store";
 import moment from 'moment-timezone';
@@ -29,7 +30,8 @@ export default class HomePage extends Component {
     render() {
         return (
             <div>
-                <SearchField></SearchField>
+                <SearchField />
+                <TimezoneDropdown />
                 <BootyList></BootyList>
             </div>
         )
