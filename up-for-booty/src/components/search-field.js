@@ -15,21 +15,22 @@ export default class SearchField extends Component {
             let startWithRegex = new RegExp('^' + e.target.value, 'ig');
             let firstNameMatchList = this.findMatch(listOfAll, startWithRegex, 'firstName');
             let lastNameMatchList = this.findMatch(listOfAll, startWithRegex, 'lastName');
-            
+
 
             //find the matches that didnt start with the search-text, but contains the search-text
-            let anyWhereRegex = new RegExp('^[^'+e.target.value+'].*'+e.target.value, 'ig');
-            let secondMatchFirstNameList = this.findMatch(listOfAll, anyWhereRegex, 'firstName');            
-            let secondMatchLastNameList = this.findMatch(listOfAll, anyWhereRegex, 'lastName');            
+            let anyWhereRegex = new RegExp('^[^' + e.target.value + '].*' + e.target.value, 'ig');
+            let secondMatchFirstNameList = this.findMatch(listOfAll, anyWhereRegex, 'firstName');
+            let secondMatchLastNameList = this.findMatch(listOfAll, anyWhereRegex, 'lastName');
 
             //mash these two arrays together to get the best scores first in the array
             let resultList = firstNameMatchList.concat(lastNameMatchList, secondMatchFirstNameList, secondMatchLastNameList);
-
+            
             //take away all duplicate
-            for(let i = resultList.length-1; i >= 0; i--){
-                for(let j = i-1; j >= 0; j--){                    
-                    if(resultList[i]._id === resultList[j]._id){
-                        resultList.splice(i, 1)
+            if (resultList.length > 1) {
+                for (let i = resultList.length - 1; i > 0; i--) {
+                    let otherIndex = resultList.findIndex(obj => obj._id === resultList[i]._id);
+                    if (otherIndex !== i) {
+                        resultList.splice(i, 1);
                     }
                 }
             }
@@ -42,7 +43,7 @@ export default class SearchField extends Component {
         }
     }
 
-    findMatch(list, regex, key){
+    findMatch(list, regex, key) {
         let matchList = list.filter(function (item) {
             return item[key].match(regex);
         });
