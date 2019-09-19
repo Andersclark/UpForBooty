@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import BootyList from './components/booty-list';
 import SearchField from './components/search-field';
-import TimezoneDropdown from './components/timezone-dropdown';
+//import TimezoneDropdown from './components/timezone-dropdown';
 import axios from 'axios';
 import store from "./store";
+import './App.css';
 import moment from 'moment-timezone';
 
 export default class HomePage extends Component {
@@ -37,7 +38,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <SearchField searchCallback = {this.searchCallback} ></SearchField>
-                <TimezoneDropdown />
+                {/* <TimezoneDropdown /> */}
                 <BootyList list = {this.state.search ? this.state.search: this.state.booties} ></BootyList>
             </div>
         )

@@ -37,6 +37,16 @@ button {
   font-size: large;
 }
 
+a>p{
+  color: black;
+}
+
+/* BOOTYDEETS */
+.fontawesome {
+  margin-right: 10px;
+  color: gray;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
