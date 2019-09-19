@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import store from '../store';
+import moment from 'moment-timezone';
 
 const Booty = props => (
   <tr>
     <td>{props.booty.firstName} {props.booty.lastName}</td>
     <td>{props.booty.timezone}</td>
-    <td>{props.booty.time.format("hh:mm:ss")}</td>
+    <td>{props.booty.time.format("HH:mm:ss")}</td>
     <td>
       <Link to={"/view/" + props.booty._id}>View details</Link>
     </td>
@@ -26,6 +28,7 @@ export default class BootyList extends Component {
     // Create a function and add as a subscriber to changes in the store
     this.storeSubscriber = (...x) => this.reactOnStoreChanges(...x);
     store.subscribeToChanges(this.storeSubscriber)
+    this.updateTime();
   }
 
   reactOnStoreChanges(newBooties) {
@@ -43,6 +46,21 @@ export default class BootyList extends Component {
       return <Booty booty={currentBooty} key={currentBooty._id} />;
     })
   }
+
+  sleep(ms){
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  
+  async updateTime(){
+    while(this._isMounted){
+        let newBooties = this.state.booties.slice();
+        for (let booty of newBooties){
+          booty.time = moment(booty.time).add(500, "ms")
+        }
+        this.setState({booties:newBooties});
+        await this.sleep(500);
+    }
+  } 
 
   render() {
     return (

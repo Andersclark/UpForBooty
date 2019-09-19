@@ -5,12 +5,12 @@ import store from '../store';
 export default class TimezoneDropdown extends Component {
     constructor(props) {
         super(props);
-        this.state = { booties: [] };
-
-        this.toggle = this.toggle.bind(this);
         this.state = {
+            booties: [],
             dropdownOpen: false
         };
+
+        this.toggle = this.toggle.bind(this);
     }
 
     componentDidMount() {
@@ -31,13 +31,26 @@ export default class TimezoneDropdown extends Component {
 
     timezoneList() {
         if (this.state.booties) {
-            let unique = [...new Set(this.state.booties.map(booty => booty.timezone))].sort(); 
+            let unique = [...new Set(this.state.booties.map(booty => booty.timezone))].sort();
 
             return unique.map(current => {
-                return <DropdownItem>{current}</DropdownItem>;
+                return <DropdownItem onClick={this.onChangeHandler} value={current}>{current}</DropdownItem>;
             });
         }
         else (console.log('fuck'))
+    }
+
+    onChangeHandler = (event) => {
+        console.log(event.target.value)
+        let zoneChoice = event.target.value;
+
+        let filtered = [];
+        for (let i = 0; i < this.state.booties.length; i++) {
+            if (this.state.booties[i].timezone === zoneChoice) {
+                filtered.push(this.state.booties[i]);
+            }
+        }
+        console.log(filtered);
     }
 
     toggle() {
