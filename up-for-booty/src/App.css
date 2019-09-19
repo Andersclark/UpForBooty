@@ -41,6 +41,19 @@ a>p{
   color: black;
 }
 
+.logo {
+  font-family: 'Turret Road', cursive;
+}
+
+#bold {
+  font-weight: bold;
+}
+
+/*SEARCH*/
+#exampleSearch {
+  width: 40vw;
+}
+
 /* BOOTYDEETS */
 .fontawesome {
   margin-right: 10px;

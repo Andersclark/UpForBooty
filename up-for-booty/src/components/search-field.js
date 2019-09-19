@@ -54,7 +54,7 @@ export default class SearchField extends Component {
             <div>
                 <Form>
                     <FormGroup>
-                        <Label>Search</Label>
+                        <Label className="logo" id="bold">Search</Label>
                         <Input
                             type="search"
                             name="search"

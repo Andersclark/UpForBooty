@@ -22,7 +22,7 @@ export default class BootyDetails extends Component {
     return (
       <div className="container">
          <div className="bootyDeets">
-        <h4>{this.state.booty.firstName} {this.state.booty.firstName}</h4>
+        <h4>{this.state.booty.firstName} {this.state.booty.lastName}</h4>
         <p><i className="fas fa-phone-alt fontawesome"></i>Phone number: {this.state.booty.phoneNo}</p>
         <a href="https://www.skype.com/sv/"><p><i className="fab fa-skype fontawesome"></i>Skype handle: {this.state.booty.skypeHandle}</p></a>
         <p><i className="far fa-envelope-open fontawesome"></i>Email: {this.state.booty.email}</p>
