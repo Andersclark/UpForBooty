@@ -6,7 +6,7 @@ const Booty = props => (
   <tr>
     <td>{props.booty.firstName} {props.booty.lastName}</td>
     <td>{props.booty.timezone}</td>
-    <td>{props.booty.time.format("hh:mm:ss")}</td>
+    <td>{props.booty.time.format("HH:mm:ss")}</td>
     <td>
       <Link to={"/view/" + props.booty._id}>View details</Link>
     </td>
