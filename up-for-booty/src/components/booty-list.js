@@ -65,12 +65,14 @@ export default class BootyList extends Component {
   render() {
     return (
       <div>
-        <h3>Booty List</h3>
+        <h3 className="logo">Booty List</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Name</th>
-              <th>Local time</th>
+              <th className="logo">Name</th>
+              <th className="logo">Timezone</th>
+              <th className="logo">Current local time</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

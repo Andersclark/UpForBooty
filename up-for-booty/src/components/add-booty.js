@@ -84,7 +84,7 @@ export default class AddBooty extends Component {
   render() {
     return (
       <Container className="App">
-        <h2>Add a booty!</h2>
+        <h2 className="logo">Add a booty!</h2>
         <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
           <Row form>
             <Col className="colStyle">
