@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import store from '../store';
-import moment from 'moment-timezone';
 
 const Booty = props => (
   <tr>
@@ -46,7 +44,7 @@ export default class BootyList extends Component {
       return <Booty booty={currentBooty} key={currentBooty._id} />;
     })
   }
-
+/* 
   sleep(ms){
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -60,7 +58,7 @@ export default class BootyList extends Component {
         this.setState({booties:newBooties});
         await this.sleep(500);
     }
-  } 
+  }  */
 
   render() {
     return (

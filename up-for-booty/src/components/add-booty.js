@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
 import '../App.css';
-import TimezoneDropdown from './timezone-dropdown';
 
 
 export default class AddBooty extends Component {
