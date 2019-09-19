@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
 import '../App.css';
+import TimezoneDropdown from './timezone-dropdown';
 
 
 export default class AddBooty extends Component {
@@ -169,20 +170,12 @@ export default class AddBooty extends Component {
             </Col>
           </Row>
 
-          <Col className="colStyle">
+      {/*     <Col className="colStyle">
             <FormGroup>
               <Label>Timezone</Label>
-              <Input type="select" required name="timezone" className="form-control"
-                value={this.state.timezone}
-                onChange={this.onChangeHandler}>
-                <option>time 1</option>
-                <option>time 2</option>
-                <option>time 3</option>
-                <option>time 4</option>
-                <option>time 5</option>
-              </Input>
+                <TimezoneDropdown />
             </FormGroup>
-          </Col>
+          </Col> */}
 
           <Button>Add that booty</Button>
         </Form>
