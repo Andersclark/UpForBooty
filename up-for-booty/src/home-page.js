@@ -5,6 +5,7 @@ import TimezoneDropdown from './components/timezone-dropdown';
 import axios from 'axios';
 import store from "./store";
 import moment from 'moment-timezone';
+import moment from 'moment';
 
 export default class HomePage extends Component {
     constructor(props) {
