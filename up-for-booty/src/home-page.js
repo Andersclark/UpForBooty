@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import BootyList from './components/booty-list';
 import SearchField from './components/search-field';
+import TimezoneDropdown from './components/timezone-dropdown';
 import axios from 'axios';
 import store from "./store";
+import moment from 'moment-timezone';
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -14,8 +16,13 @@ export default class HomePage extends Component {
     readFromDB() {
         axios.get('http://localhost:5000/booty/')
             .then(response => {
-                store.saveToBooties(response.data)
-                this.setState({booties: response.data})
+            
+                let dataWithTime = response.data.map(booty => {
+                    booty.time = moment.tz(booty.timezone)
+                    return booty;
+                });
+                store.saveToBooties(dataWithTime)
+                this.setState({booties: dataWithTime})
             })
             .catch((error) => {
                 console.log(error);
@@ -30,6 +37,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <SearchField searchCallback = {this.searchCallback} ></SearchField>
+                <TimezoneDropdown />
                 <BootyList list = {this.state.search ? this.state.search: this.state.booties} ></BootyList>
             </div>
         )
