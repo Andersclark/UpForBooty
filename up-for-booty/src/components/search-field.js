@@ -15,7 +15,7 @@ export default class SearchField extends Component {
             let startWithRegex = new RegExp('^' + e.target.value, 'ig')
             let firstMatchList = this.findMatch(listOfAll, startWithRegex)
             //find the matches that didnt start with the search-text, but contains the search-text
-            let anyWhereRegex = new RegExp('^[^'+e.target.value+'].*'+e.target.value, 'ig')
+            let anyWhereRegex = new RegExp('^(?!'+e.target.value+').*'+e.target.value, 'ig')
             let secondMatchList = this.findMatch(listOfAll, anyWhereRegex)            
     
             //mash these two arrays together to get the best scores first in the array
