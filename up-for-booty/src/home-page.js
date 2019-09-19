@@ -11,6 +11,7 @@ export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.readFromDB();
+        this.state = {booties: []};
     }
 
     readFromDB() {
@@ -22,18 +23,23 @@ export default class HomePage extends Component {
                     return booty;
                 });
                 store.saveToBooties(dataWithTime)
+                this.setState({booties: dataWithTime})
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
-    render() {
+    searchCallback = (searchData) => {
+        this.setState({search: searchData })
+    }
+
+    render() {       
         return (
             <div>
-                <SearchField />
+                <SearchField searchCallback = {this.searchCallback} ></SearchField>
                 {/* <TimezoneDropdown /> */}
-                <BootyList></BootyList>
+                <BootyList list = {this.state.search ? this.state.search: this.state.booties} ></BootyList>
             </div>
         )
     }

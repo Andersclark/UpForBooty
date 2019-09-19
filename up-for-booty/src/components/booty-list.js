@@ -15,6 +15,8 @@ const Booty = props => (
 )
 
 export default class BootyList extends Component {
+  //moving the list to props instead of state so this down is noot needed
+/*  
   constructor(props) {
     super(props);
     this.state = { booties: [] };
@@ -37,9 +39,10 @@ export default class BootyList extends Component {
     this._isMounted = false;
     store.unsubscribeToChanges(this.storeSubscriber);
   }
+  */
 
   bootyList() {
-    return this.state.booties.map(currentBooty => {
+    return this.props.list.map(currentBooty => {
       return <Booty booty={currentBooty} key={currentBooty._id} />;
     })
   }
