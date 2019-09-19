@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import moment from 'moment-timezone';
 
 export default class BootyDetails extends Component {
   constructor(props) {
@@ -13,9 +12,6 @@ export default class BootyDetails extends Component {
     axios.get('http://localhost:5000/booty/view/' + this.props.match.params.id)
       .then(response => {
         this.setState({ booty: response.data })
-/*         let time = moment.tz(this.state.booty.timezone)
-        bootyObj = {...this.state.booty, time};
-        this.setState({bootyObj})  */
       })
       .catch((error) => {
         console.log(error);

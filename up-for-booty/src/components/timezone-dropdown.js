@@ -5,12 +5,12 @@ import store from '../store';
 export default class TimezoneDropdown extends Component {
     constructor(props) {
         super(props);
-        this.state = { booties: [] };
-
-        this.toggle = this.toggle.bind(this);
         this.state = {
+            booties: [],
             dropdownOpen: false
         };
+
+        this.toggle = this.toggle.bind(this);
     }
 
     componentDidMount() {
