@@ -40,9 +40,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>
-                {/* <TimezoneDropdown /> */}
-
-                <Slider />
+                <Slider searchCallback = {this.searchCallback} />
                 <BootyList list={this.state.search ? this.state.search : this.state.booties} ></BootyList>
             </div>
         )
