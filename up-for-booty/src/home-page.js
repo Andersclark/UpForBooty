@@ -36,6 +36,27 @@ export default class HomePage extends Component {
         this.setState({ search: searchData })
     }
 
+    sleep(ms){
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+      
+      async updateTime(){
+        while(this._isMounted){
+            let newBooties = this.state.booties.slice();
+            for (let booty of newBooties){
+              booty.time = moment(booty.time).add(500, "ms")
+            }
+            this.setState({booties:newBooties});
+            await this.sleep(500);
+        }
+      }
+      componentDidMount(){
+        this._isMounted = true;
+        this.updateTime();
+      }
+      componentWillUnmount(){
+        this._isMounted = false;
+      }
     render() {
         return (
             <div>
