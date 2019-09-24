@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import store from '../store';
+//import store from '../store';
 import moment from 'moment-timezone';
 
 const Booty = props => (

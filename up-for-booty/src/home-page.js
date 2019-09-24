@@ -7,7 +7,7 @@ import store from "./store";
 import './App.css';
 import moment from 'moment-timezone';
 import Slider from './components/timezone-slider'
-import 'rc-slider/assets/index.css';
+//import 'rc-slider/assets/index.css';
 
 export default class HomePage extends Component {
     constructor(props) {

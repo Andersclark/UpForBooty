@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Slider from 'rc-slider';
-import Tooltip from 'rc-tooltip';
 
 import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
@@ -22,22 +21,27 @@ export default class TimezoneSlider extends Component {
       value: [1, 24],
     };
   }
+
   onLowerBoundChange = (e) => {
     this.setState({ lowerBound: +e.target.value });
   }
+
   onUpperBoundChange = (e) => {
     this.setState({ upperBound: +e.target.value });
   }
+
   onSliderChange = (value) => {
     log(value);
     this.setState({
       value,
     });
   }
+
   handleApply = () => {
     const { lowerBound, upperBound } = this.state;
     this.setState({ value: [lowerBound, upperBound] });
   }
+  
   render() {
     return (
       <div>
