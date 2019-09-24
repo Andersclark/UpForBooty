@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
 import '../App.css';
-import TimezoneDropdown from './timezone-dropdown';
-
 
 export default class AddBooty extends Component {
   constructor(props) {
@@ -20,16 +18,13 @@ export default class AddBooty extends Component {
       timezone: '',
       validate: {
         emailState: '',
-        phoneNoState: ''
+        phoneNoState: '',
+        country: ''
       }
     };
 
     this.onSubmit = this.onSubmit.bind(this);
   }
-
-  /* componentDidMount() {
-    console.log('add booty mounted!')
-  } */
 
   onChangeHandler = (event) => {
     let nam = event.target.name;
@@ -58,6 +53,16 @@ export default class AddBooty extends Component {
       validate.phoneNoState = 'has-fail'
     }
   }
+
+  /* validateCountry(e) {
+    const countries = ['sweden', 'us', 'ireland'];
+    if(countries.includes(e.target.value)) {
+      console.log('country!');
+    }
+    else {
+      console.log('not a country');
+    }
+  } */
 
   onSubmit(e) {
     e.preventDefault();
@@ -149,6 +154,19 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
+          <Col>
+              <FormGroup>
+                <Label>Country: </Label>
+                <Input type="text" required name="country" className="form-control"
+                  value={this.state.country}
+                  onChange={(e) => {
+                    /* this.validateCountry(e) */
+                    this.onChangeHandler(e)
+                  }}
+                />
+              </FormGroup>
+            </Col>
+
             <Col md={6}>
               <FormGroup>
                 <Label>City: </Label>
@@ -158,24 +176,9 @@ export default class AddBooty extends Component {
                 />
               </FormGroup>
             </Col>
-
-            <Col>
-              <FormGroup>
-                <Label>Country: </Label>
-                <Input type="text" required name="country" className="form-control"
-                  value={this.state.country}
-                  onChange={this.onChangeHandler}
-                />
-              </FormGroup>
-            </Col>
           </Row>
 
-      {/*     <Col className="colStyle">
-            <FormGroup>
-              <Label>Timezone</Label>
-                <TimezoneDropdown />
-            </FormGroup>
-          </Col> */}
+
 
           <Button>Add that booty</Button>
         </Form>
