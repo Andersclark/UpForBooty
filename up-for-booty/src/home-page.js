@@ -44,10 +44,10 @@ export default class HomePage extends Component {
         while(this._isMounted){
             let newBooties = this.state.booties.slice();
             for (let booty of newBooties){
-              booty.time = moment(booty.time).add(500, "ms")
+              booty.time = moment(booty.time).add(5000, "ms")
             }
             this.setState({booties:newBooties});
-            await this.sleep(500);
+            await this.sleep(5000);
         }
       }
       componentDidMount(){
