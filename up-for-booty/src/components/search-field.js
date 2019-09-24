@@ -3,8 +3,7 @@ import { Form, FormGroup, Label, Input } from 'reactstrap';
 import store from "../store";
 
 export default class SearchField extends Component {
-
-    onSearch(e) {
+    search(e) {                    
         //if there is a value, do the filtering
         if (e.target.value) {
             //get whole list
@@ -53,7 +52,7 @@ export default class SearchField extends Component {
     render() {
         return (
             <div>
-                <Form>
+                <Form onSubmit={(e) => e.preventDefault()}  >
                     <FormGroup>
                         <Label className="logo" id="bold">Search</Label>
                         <Input
@@ -61,7 +60,7 @@ export default class SearchField extends Component {
                             name="search"
                             id="exampleSearch"
                             placeholder="search"
-                            onKeyUp={(e) => this.onSearch(e)}
+                            onChange={(e) => this.search(e)}              
                         />
                     </FormGroup>
                 </Form>
