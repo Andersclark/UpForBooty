@@ -5,11 +5,10 @@ import store from "../store";
 export default class SearchField extends Component {
 
     onSearch(e) {
+        //get whole list
+        let listOfAll = store.getBooties();
         //if there is a value, do the filtering
         if (e.target.value) {
-            //get whole list
-            let listOfAll = store.getBooties();
-
             //filter it 
             //find the matches that did start with the search-text)
             let startWithRegex = new RegExp('^' + e.target.value, 'ig')
@@ -22,11 +21,11 @@ export default class SearchField extends Component {
             let resultList = firstMatchList.concat(secondMatchList);
 
             //send the filterd array to the parent
-            this.props.searchCallback(resultList);
+            this.props.callback(resultList);
         }
         else {
             //send null to parent since search has been erased
-            this.props.searchCallback(null);
+            this.props.callback(listOfAll);
         }
     }
 

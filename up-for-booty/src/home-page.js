@@ -6,6 +6,7 @@ import axios from 'axios';
 import store from "./store";
 import './App.css';
 import moment from 'moment-timezone';
+import SortBtn from './components/sort-btn'
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -30,16 +31,17 @@ export default class HomePage extends Component {
             });
     }
 
-    searchCallback = (searchData) => {
-        this.setState({search: searchData })
+    callback = (list) => {
+        this.setState({booties: list })
     }
 
     render() {       
         return (
             <div>
-                <SearchField searchCallback = {this.searchCallback} ></SearchField>
+                <SearchField callback = {this.callback} ></SearchField>
+                <SortBtn list = {this.state.booties} callback = {this.callback}/>
                 {/* <TimezoneDropdown /> */}
-                <BootyList list = {this.state.search ? this.state.search: this.state.booties} ></BootyList>
+                <BootyList list = {this.state.booties} ></BootyList>
             </div>
         )
     }
