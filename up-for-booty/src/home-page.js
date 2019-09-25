@@ -40,11 +40,10 @@ export default class HomePage extends Component {
     render() {
         return (
             <div>
-                <SearchField callback = {this.callback} ></SearchField>
-                <SortBtn list = {this.state.booties} callback = {this.callback}/>
-                {/* <TimezoneDropdown /> */}
-                <Slider />
                 <BootyList list = {this.state.booties} ></BootyList>
+                <Slider searchCallback = {this.searchCallback} />
+                <SortBtn list = {this.state.booties} callback = {this.callback}/>
+                <SearchField callback = {this.callback} ></SearchField>
             </div>
         )
     }
