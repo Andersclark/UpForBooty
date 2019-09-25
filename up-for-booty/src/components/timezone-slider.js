@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Slider from 'rc-slider';
-import store from "../store";
 
 import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
@@ -22,21 +21,7 @@ export default class TimezoneSlider extends Component {
     this.setState({
       value
     });
-    this.filterByTime();
-  }
-
-  filterByTime() {
-    let listOfAll = store.getBooties();
-    let filteredList = [];
-    
-    for(let i = 0; i < listOfAll.length; i++) {
-      let currTime = JSON.stringify(listOfAll[i].time._d).substring(12, 14);
-      if(currTime >= this.state.value[0] && currTime <= this.state.value[1]) {
-        filteredList.push(listOfAll[i]);
-      }
-    }
-
-    this.props.searchCallback(filteredList);
+    this.props.sliderCallback(value);
   }
   
   render() {
