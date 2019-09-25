@@ -3,12 +3,10 @@ import { Form, FormGroup, Label, Input } from 'reactstrap';
 import store from "../store";
 
 export default class SearchField extends Component {
-    search(e) {                    
+    search(e) {        
+        let listOfAll=store.getBooties();            
         //if there is a value, do the filtering
         if (e.target.value) {
-            //get whole list
-            let listOfAll = store.getBooties();
-
             //filter it 
             //find the matches that did start with the search-text, both on first and lastname
             let startWithRegex = new RegExp('^' + e.target.value, 'ig');
@@ -38,7 +36,7 @@ export default class SearchField extends Component {
         }
         else {
             //send null to parent since search has been erased
-            this.props.searchCallback(null);
+            this.props.callback(listOfAll);
         }
     }
 
