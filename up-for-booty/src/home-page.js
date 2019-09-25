@@ -55,12 +55,26 @@ export default class HomePage extends Component {
 
     }
 
+    sortCallback = (sortedList) => {
+        if (sortedList) {
+            console.log('sorterad lista');
+
+            this.setState({ listToDisplay: sortedList })
+        }
+        else {
+            console.log('verkar inte finnas en sorterad lista');
+            console.log(this.state.defaultList);
+            
+            this.setState({ listToDisplay: this.state.defaultList })
+        }
+    }
+
     render() {
         return (
             <div>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>
                 <Slider sliderCallback={this.sliderCallback} />
-                <SortBtn list={this.state.booties} callback={this.callback} />
+                <SortBtn defaultList={this.state.defaultList} sortCallback={this.sortCallback} />
                 <BootyList list={this.state.listToDisplay} ></BootyList>
             </div>
         )
