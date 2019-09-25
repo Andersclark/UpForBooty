@@ -31,8 +31,6 @@ export default class TimezoneSlider extends Component {
     
     for(let i = 0; i < listOfAll.length; i++) {
       let currTime = JSON.stringify(listOfAll[i].time._d).substring(12, 14);
-
-      console.log('bounds',this.state.value[0], this.state.value[1]);
       if(currTime >= this.state.value[0] && currTime <= this.state.value[1]) {
         filteredList.push(listOfAll[i]);
       }
