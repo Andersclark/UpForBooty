@@ -3,12 +3,12 @@ import './analogclock.css';
 
 export default class Analogclock extends Component {
   
-  initClock() {
-    // Get the local time using JS
-    const date = new Date();
-    let seconds = date.getSeconds();
-    let minutes = date.getMinutes();
-    let hours = date.getHours();
+    initClock() {
+    //TODO: Construct date from moment-prop
+    const date = this.props.time;
+    let seconds = date.format("ss");
+    let minutes = date.format("mm");
+    let hours = date.format("hh");
   
     let hands = [
       {
@@ -46,7 +46,6 @@ export default class Analogclock extends Component {
   render(){
     return (
       <div>
-          <h1>A CLOCK</h1>
           <div className="clockface">
             <div className="minutsecontainer">
               <div className="minutehand"></div>
