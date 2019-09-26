@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
 import '../App.css';
+import TimeDropdown from './time-dropdown';
 
 export default class AddBooty extends Component {
   constructor(props) {
@@ -154,7 +155,7 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
-          <Col>
+            <Col>
               <FormGroup>
                 <Label>Country: </Label>
                 <Input type="text" required name="country" className="form-control"
@@ -178,7 +179,20 @@ export default class AddBooty extends Component {
             </Col>
           </Row>
 
-
+          <Row>
+            <Col md={6}>
+              <FormGroup>
+                <Label>Sleeping: </Label>
+                <TimeDropdown />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+              <Label>Working: </Label>
+                <TimeDropdown />
+              </FormGroup>
+            </Col>
+          </Row>
 
           <Button>Add that booty</Button>
         </Form>

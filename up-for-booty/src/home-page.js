@@ -15,7 +15,7 @@ export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.readFromDB();
-        this.state = {listToDisplay: []};
+        this.state = { listToDisplay: [] };
     }
 
     readFromDB() {
@@ -64,32 +64,32 @@ export default class HomePage extends Component {
         else {
             console.log('verkar inte finnas en sorterad lista');
             console.log(this.state.defaultList);
-            
+
             this.setState({ listToDisplay: this.state.defaultList })
         }
     }
 
-    sleep(ms){
+    sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
-      }
-      
-      async updateTime(){
-        while(this._isMounted){
-            let newBooties = this.state.booties.slice();
-            for (let booty of newBooties){
-              booty.time = moment(booty.time).add(5000, "ms")
+    }
+
+    async updateTime() {
+        while (this._isMounted) {
+            let newBooties = this.state.listToDisplay.slice();
+            for (let booty of newBooties) {
+                booty.time = moment(booty.time).add(5000, "ms")
             }
-            this.setState({booties:newBooties});
+            this.setState({ booties: newBooties });
             await this.sleep(5000);
         }
-      }
-      componentDidMount(){
+    }
+    componentDidMount() {
         this._isMounted = true;
         this.updateTime();
-      }
-      componentWillUnmount(){
+    }
+    componentWillUnmount() {
         this._isMounted = false;
-      }
+    }
     render() {
         return (
             <div>
