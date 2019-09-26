@@ -8,12 +8,14 @@ import './App.css';
 import moment from 'moment-timezone';
 import Slider from './components/timezone-slider'
 //import 'rc-slider/assets/index.css';
+import SortBtn from './components/sort-btn'
+import filter from './filter';
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.readFromDB();
-        this.state = { booties: [] };
+        this.state = {listToDisplay: []};
     }
 
     readFromDB() {
@@ -25,15 +27,46 @@ export default class HomePage extends Component {
                     return booty;
                 });
                 store.saveToBooties(dataWithTime)
-                this.setState({ booties: dataWithTime })
+                this.setState({ defaultList: dataWithTime, listToDisplay: dataWithTime })
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
-    searchCallback = (searchData) => {
-        this.setState({ search: searchData })
+    searchCallback = (searchValue) => {
+        let newList = filter({
+            search: searchValue,
+            slider: this.state.slider,
+        });
+        //deal with sorting
+
+        this.setState({ search: searchValue, defaultList: newList, listToDisplay: newList });
+    }
+
+    sliderCallback = (sliderValue) => {
+        let newList = filter({
+            search: this.state.search,
+            slider: sliderValue,
+        });
+        //deal with sorting
+
+        this.setState({ slider: sliderValue, defaultList: newList, listToDisplay: newList });
+
+    }
+
+    sortCallback = (sortedList) => {
+        if (sortedList) {
+            console.log('sorterad lista');
+
+            this.setState({ listToDisplay: sortedList })
+        }
+        else {
+            console.log('verkar inte finnas en sorterad lista');
+            console.log(this.state.defaultList);
+            
+            this.setState({ listToDisplay: this.state.defaultList })
+        }
     }
 
     sleep(ms){
@@ -61,10 +94,9 @@ export default class HomePage extends Component {
         return (
             <div>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>
-                {/* <TimezoneDropdown /> */}
-
-                <Slider />
-                <BootyList list={this.state.search ? this.state.search : this.state.booties} ></BootyList>
+                <Slider sliderCallback={this.sliderCallback} />
+                <SortBtn defaultList={this.state.defaultList} sortCallback={this.sortCallback} />
+                <BootyList list={this.state.listToDisplay} ></BootyList>
             </div>
         )
     }
