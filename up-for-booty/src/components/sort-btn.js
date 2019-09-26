@@ -8,36 +8,33 @@ export default class SortBtn extends Component {
         this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
     }
 
-    onRadioBtnClick(selected) {
+    onRadioBtnClick(selected) {        
         this.setState({ sortBy: selected });
+        let sortedList= this.props.defaultList;       
 
-        let sortedList= this.props.list;        
         //sort the list
         switch (selected) {
-            case 'FIRST_NAME':
-                
+            case 'FIRST_NAME': 
                 sortedList.sort(function(a,b){
                     return a.firstName.localeCompare(b.firstName);
                 })
+                this.props.sortCallback(sortedList);
+
                 break;
             case 'LAST_NAME':
                     sortedList.sort(function(a,b){
                         return a.lastName.localeCompare(b.lastName);
                     })
+                    this.props.sortCallback(sortedList);
 
                 break;
-            case 'DEFAULT':
-                console.log("default jao");
-                //getting it back to defaul
-                
+            default:
+                this.props.sortCallback(null);
                 break;
         }
-
-        //send the sorted list back
-        this.props.callback(sortedList);
     }
 
-    render() {
+    render() {        
         return (
             <div>
                 <Label className="logo" id="bold">Sort By  </Label>

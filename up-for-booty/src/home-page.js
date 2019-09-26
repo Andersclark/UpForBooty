@@ -9,12 +9,13 @@ import moment from 'moment-timezone';
 import Slider from './components/timezone-slider'
 //import 'rc-slider/assets/index.css';
 import SortBtn from './components/sort-btn'
+import filter from './filter';
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.readFromDB();
-        this.state = { booties: [] };
+        this.state = {listToDisplay: []};
     }
 
     readFromDB() {
@@ -26,25 +27,55 @@ export default class HomePage extends Component {
                     return booty;
                 });
                 store.saveToBooties(dataWithTime)
-                this.setState({ booties: dataWithTime })
+                this.setState({ defaultList: dataWithTime, listToDisplay: dataWithTime })
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
-    callback = (list) => {
-        this.setState({booties: list })
+    searchCallback = (searchValue) => {
+        let newList = filter({
+            search: searchValue,
+            slider: this.state.slider,
+        });
+        //deal with sorting
+
+        this.setState({ search: searchValue, defaultList: newList, listToDisplay: newList });
+    }
+
+    sliderCallback = (sliderValue) => {
+        let newList = filter({
+            search: this.state.search,
+            slider: sliderValue,
+        });
+        //deal with sorting
+
+        this.setState({ slider: sliderValue, defaultList: newList, listToDisplay: newList });
+
+    }
+
+    sortCallback = (sortedList) => {
+        if (sortedList) {
+            console.log('sorterad lista');
+
+            this.setState({ listToDisplay: sortedList })
+        }
+        else {
+            console.log('verkar inte finnas en sorterad lista');
+            console.log(this.state.defaultList);
+            
+            this.setState({ listToDisplay: this.state.defaultList })
+        }
     }
 
     render() {
         return (
             <div>
-                <SearchField callback = {this.callback} ></SearchField>
-                <SortBtn list = {this.state.booties} callback = {this.callback}/>
-                {/* <TimezoneDropdown /> */}
-                <Slider />
-                <BootyList list = {this.state.booties} ></BootyList>
+                <SearchField searchCallback={this.searchCallback} ></SearchField>
+                <Slider sliderCallback={this.sliderCallback} />
+                <SortBtn defaultList={this.state.defaultList} sortCallback={this.sortCallback} />
+                <BootyList list={this.state.listToDisplay} ></BootyList>
             </div>
         )
     }
