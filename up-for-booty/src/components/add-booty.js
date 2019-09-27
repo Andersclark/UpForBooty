@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
-import '../App.css';
 
 export default class AddBooty extends Component {
   constructor(props) {
@@ -89,7 +88,7 @@ export default class AddBooty extends Component {
   render() {
     return (
       <Container className="App">
-        <h2 className="logo">Add a booty!</h2>
+        <h3 className="bootyheader">New bootycall</h3>
         <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
           <Row form>
             <Col className="colStyle">
@@ -180,7 +179,7 @@ export default class AddBooty extends Component {
 
 
 
-          <Button>Add that booty</Button>
+          <Button color="info">Add that booty</Button>
         </Form>
       </Container>
     );

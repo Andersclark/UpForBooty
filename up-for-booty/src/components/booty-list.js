@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Col, Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button
+} from 'reactstrap';
 
 const Booty = props => (
-  <tr>
-    <td>{props.booty.firstName} {props.booty.lastName}</td>
-    <td>{props.booty.timezone}</td>
-    <td>{props.booty.time.format("HH:mm")}</td>
-    <td>
-      <Link to={"/view/" + props.booty._id}>View details</Link>
-    </td>
-  </tr>
+      <Col sm="6">
+        <Card className="bootycard">
+            <CardImg top width="100%" height="40%" src={"http://localhost:5000/img/" + props.booty.picture + ".jpg"} alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
+            <CardBody>
+              <CardTitle><h3 className="bootycardheader">{props.booty.firstName} {props.booty.lastName}</h3></CardTitle>
+              <CardSubtitle><i>{props.booty.timezone} {props.booty.time.format("HH:mm")}</i></CardSubtitle>
+              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+              <Button color="info" href={"/view/" + props.booty._id}>View details</Button>
+            </CardBody>
+          </Card> 
+      </Col>
 )
 
 export default class BootyList extends Component {
@@ -23,20 +29,7 @@ export default class BootyList extends Component {
   render() {
     return (
       <div>
-        <h3 className="logo">Booty List</h3>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th className="logo">Name</th>
-              <th className="logo">Timezone</th>
-              <th className="logo">Current local time</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
             { this.bootyList() }
-          </tbody>
-        </table>
       </div>
     )
   }

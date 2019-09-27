@@ -1,66 +1,68 @@
-.App.container {
+body {
+  background: linear-gradient(purple, yellow);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.App{
+  box-sizing: border-box;
   text-align: left;
-  padding: 1em;
-  margin: 1em;
-  border: 2px solid #d3d3d3;
-  border-radius: .5em;
   vertical-align: middle;
   margin-left: auto;
   margin-right: auto;
-  width: 70vw;
-  margin-top: 5vh;
 }
 
-.form {
-  padding: 1em;
-  width: 50vw;
+.bootyapp {
+  padding-top: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background: linear-gradient(purple, yellow);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-.colStyle.col {
-  padding: 0px 5px;
+.bootycard {
+  margin: 2%;
+  padding: 2%;
+}
+.bootycardheader {
+  margin-top: 2%;
+  font-weight: 700;
 }
 
-label {
-  display: flex;
-  font-weight: 600;
+.searchfield {
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
-button {
-  justify-content: flex-end;
+.bootyslider {
+  margin: 15%;
 }
 
-.App-title {
-  font-size: 1.5em;
+.bootyheader {
+  color: white;
+  margin-top: 10%;
+  font-weight: 700;
+}
+.bootynavheader {
+  color: white;
+  margin-top: 10%;
+  font-weight: 900;
 }
 
-.App-intro {
-  font-size: large;
+.bootyheart {
+  animation-name: heartbeat;
+  animation-duration: 1s;
+  animation-delay: 4s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
 }
-
-a>p{
-  color: black;
-}
-
-.logo {
-  font-family: 'Turret Road', cursive;
-}
-
-#bold {
-  font-weight: bold;
-}
-
-/*SEARCH*/
-#exampleSearch {
-  width: 40vw;
-}
-
-/* BOOTYDEETS */
-.fontawesome {
-  margin-right: 10px;
-  color: gray;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes heartbeat {
+  from {
+        transform: scale(1, 1);
+        color: white;  
+      }
+  to {transform: scale(0.7, 0.7); 
+      color: white; 
+  }
 }

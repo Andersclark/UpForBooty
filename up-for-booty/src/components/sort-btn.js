@@ -16,14 +16,13 @@ export default class SortBtn extends Component {
     render() {        
         return (
             <div>
-                <Label className="logo" id="bold">Sort By  </Label>
+                <h3 className="bootyheader" id="bold">Sort By...</h3>
                 <ButtonGroup>                   
-                    {this.props.search && <Button onClick={() => this.onRadioBtnClick('SEARCH')} active={this.state.sortBy === 'SEARCH' }>Best Search Result</Button>}
-                    <Button onClick={() => this.onRadioBtnClick('FIRST_NAME')} active={this.state.sortBy === 'FIRST_NAME'}>First Name</Button>
-                    <Button onClick={() => this.onRadioBtnClick('LAST_NAME')} active={this.state.sortBy === 'LAST_NAME'}>Last Name</Button>
-                    <Button onClick={() => this.onRadioBtnClick('AVAILABILITY')} active={this.state.sortBy === 'AVAILABILITY'}>Availability</Button>
-                    <Button onClick={() => this.onRadioBtnClick('TIME')} active={this.state.sortBy === 'TIME'}>Time</Button>
-
+                    {this.props.search && <Button onClick={() => this.onRadioBtnClick('SEARCH')} active={this.state.sortBy === 'SEARCH' }>Best</Button>}
+                    <Button color="info" onClick={() => this.onRadioBtnClick('FIRST_NAME')} active={this.state.sortBy === 'FIRST_NAME'}>Firstname</Button>
+                    <Button color="info"onClick={() => this.onRadioBtnClick('LAST_NAME')} active={this.state.sortBy === 'LAST_NAME'}>Lastname</Button>
+                    <Button color="info" onClick={() => this.onRadioBtnClick('AVAILABILITY')} active={this.state.sortBy === 'AVAILABILITY'}>Availability</Button>
+                    <Button color="info"onClick={() => this.onRadioBtnClick('TIME')} active={this.state.sortBy === 'TIME'}>Time</Button>
                 </ButtonGroup>
             </div>
         )

@@ -26,12 +26,13 @@ db.once('open', () => {
       Person.insertMany(mockdata);
       console.log('Database reset complete!')
     }
-
-
 });
 
 const bootyRouter = require('./routes/booty');
 app.use('/booty', bootyRouter);
+
+
+app.use(express.static('public/img'))
 
 app.listen(5000, () => {
   console.log(' Server is running on port: 5000');

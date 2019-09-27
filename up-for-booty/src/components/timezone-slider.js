@@ -27,7 +27,7 @@ export default class TimezoneSlider extends Component {
   render() {
     return (
       <div>
-        <label>Choose a time!</label>
+        <label>Show people where time is between {this.state.value[0]}.00 and {this.state.value[1]}.00</label>
         <Range min={1} max={24} allowCross={false} value={this.state.value} onAfterChange={this.onSliderChange} onChange={this.onSliderChange} tipFormatter={value => `${value}`} />
       </div>
     );

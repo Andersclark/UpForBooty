@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Input } from 'reactstrap';
 
 export default class SearchField extends Component {
     render() {
         return (
-            <div>
+            <div className="searchfield">
                 <Form onSubmit={(e) => e.preventDefault()}  >
                     <FormGroup>
-                        <Label className="logo" id="bold">Search</Label>
                         <Input
                             type="search"
                             name="search"

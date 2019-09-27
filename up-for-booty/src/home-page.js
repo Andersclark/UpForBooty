@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import BootyList from './components/booty-list';
 import SearchField from './components/search-field';
-//import TimezoneDropdown from './components/timezone-dropdown';
 import axios from 'axios';
 import store from "./store";
 import './App.css';
 import moment from 'moment-timezone';
 import Slider from './components/timezone-slider'
-//import 'rc-slider/assets/index.css';
 import SortBtn from './components/sort-btn'
 import filter from './filter';
 
@@ -136,7 +134,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>
-                <Slider sliderCallback={this.sliderCallback} />
+                <Slider className="bootyslider" sliderCallback={this.sliderCallback} />
                 <SortBtn search={this.state.search} sortCallback={this.sortCallback} />
                 <BootyList list={this.state.listToDisplay} ></BootyList>
             </div>
