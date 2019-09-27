@@ -55,16 +55,6 @@ export default class AddBooty extends Component {
     }
   }
 
-  /* validateCountry(e) {
-    const countries = ['sweden', 'us', 'ireland'];
-    if(countries.includes(e.target.value)) {
-      console.log('country!');
-    }
-    else {
-      console.log('not a country');
-    }
-  } */
-
   onSubmit(e) {
     e.preventDefault();
 
@@ -161,7 +151,6 @@ export default class AddBooty extends Component {
                 <Input type="text" required name="country" className="form-control"
                   value={this.state.country}
                   onChange={(e) => {
-                    /* this.validateCountry(e) */
                     this.onChangeHandler(e)
                   }}
                 />
@@ -186,12 +175,12 @@ export default class AddBooty extends Component {
                 <TimeDropdown />
               </FormGroup>
             </Col>
-            <Col md={6}>
+           {/*  <Col md={6}>
               <FormGroup>
               <Label>Working: </Label>
                 <TimeDropdown />
               </FormGroup>
-            </Col>
+            </Col> */}
           </Row>
 
           <Button>Add that booty</Button>
