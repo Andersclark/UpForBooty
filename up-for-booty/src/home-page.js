@@ -75,6 +75,7 @@ export default class HomePage extends Component {
     sort(list, selected) {
         //sort the list
         switch (selected) {
+           
             case 'FIRST_NAME':
                 list.sort(function (a, b) {
                     return a.firstName.localeCompare(b.firstName);
@@ -100,6 +101,11 @@ export default class HomePage extends Component {
                 list.sort(function (a, b) {
                     return JSON.stringify(a.time._d).substring(12, 14) - JSON.stringify(b.time._d).substring(12, 14)
                     })
+                break;
+                default :
+                list.sort(function (a, b) {
+                    return a.firstName.localeCompare(b.firstName);
+                })
                 break;
         }
         return list;
