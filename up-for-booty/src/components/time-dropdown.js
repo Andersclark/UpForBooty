@@ -21,7 +21,7 @@ export default class TimezoneDropdown extends Component {
         if (this.props.sleepRange !== prevProps.sleepRange) {
             this.fetchData(this.props.sleepRange);
         }
-        console.log('range', this.state.sleepRange)
+        this.props.timeDropdownCallback(this.state.sleepRange);
     }
 
 

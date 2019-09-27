@@ -17,6 +17,7 @@ export default class AddBooty extends Component {
       city: '',
       country: '',
       timezone: '',
+      sleepRange: [],
       validate: {
         emailState: '',
         phoneNoState: '',
@@ -55,6 +56,12 @@ export default class AddBooty extends Component {
     }
   }
 
+  timeDropdownCallback = (timeRange) => {
+    console.log('here callback', timeRange);
+
+    //add new range array to state
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -66,7 +73,8 @@ export default class AddBooty extends Component {
       email: this.state.email,
       city: this.state.city,
       country: this.state.country,
-      timezone: this.state.timezone
+      timezone: this.state.timezone,
+      sleepRange: this.state.sleepRange
     };
 
     axios.post('http://localhost:5000/booty/add', booty)
@@ -172,10 +180,10 @@ export default class AddBooty extends Component {
             <Col md={6}>
               <FormGroup>
                 <Label>Sleeping: </Label>
-                <TimeDropdown />
+                <TimeDropdown timeDropdownCallback={this.timeDropdownCallback} />
               </FormGroup>
             </Col>
-           {/*  <Col md={6}>
+            {/*  <Col md={6}>
               <FormGroup>
               <Label>Working: </Label>
                 <TimeDropdown />
