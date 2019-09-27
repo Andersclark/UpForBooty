@@ -75,7 +75,7 @@ export default class HomePage extends Component {
       
       async updateTime(){
         while(this._isMounted){
-            let newBooties = this.state.booties.slice();
+            let newBooties = this.state.listToDisplay.slice();
             for (let booty of newBooties){
               booty.time = moment(booty.time).add(5000, "ms")
             }
