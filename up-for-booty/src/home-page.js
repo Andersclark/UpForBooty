@@ -15,7 +15,7 @@ export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.readFromDB();
-        this.state = {listToDisplay: []};
+        this.state = { listToDisplay: [] };
     }
 
     readFromDB() {
@@ -27,7 +27,7 @@ export default class HomePage extends Component {
                     return booty;
                 });
                 store.saveToBooties(dataWithTime)
-                this.setState({ defaultList: dataWithTime, listToDisplay: dataWithTime })
+                this.setState({ listToDisplay: dataWithTime })
             })
             .catch((error) => {
                 console.log(error);
@@ -37,36 +37,72 @@ export default class HomePage extends Component {
     searchCallback = (searchValue) => {
         let newList = filter({
             search: searchValue,
-            slider: this.state.slider,
+            slider: this.state.slider
         });
-        //deal with sorting
 
-        this.setState({ search: searchValue, defaultList: newList, listToDisplay: newList });
+        //sort the list
+        if (this.state.sort && this.state.sort !== 'SEARCH') {
+            console.log('tossing it to the sorting algorthm');
+            console.log(this.state.sort);
+            
+            
+            newList = this.sort(newList, this.state.sort);
+        }
+
+        this.setState({ search: searchValue, listToDisplay: newList });
     }
 
     sliderCallback = (sliderValue) => {
         let newList = filter({
             search: this.state.search,
-            slider: sliderValue,
+            slider: sliderValue
         });
-        //deal with sorting
 
-        this.setState({ slider: sliderValue, defaultList: newList, listToDisplay: newList });
+        //sort the list
+        if (this.state.sort) {
+            newList = this.sort(newList, this.state.sort);
+        }
+
+        this.setState({ slider: sliderValue, listToDisplay: newList });
 
     }
 
-    sortCallback = (sortedList) => {
-        if (sortedList) {
-            console.log('sorterad lista');
+    sortCallback = (selected) => {
+        let sortedList = this.sort(this.state.listToDisplay, selected);
+        this.setState({ sort: selected, listToDisplay: sortedList })
+    }
 
-            this.setState({ listToDisplay: sortedList })
+    sort(list, selected) {
+        //sort the list
+        switch (selected) {
+            case 'FIRST_NAME':
+                list.sort(function (a, b) {
+                    return a.firstName.localeCompare(b.firstName);
+                })
+                break;
+            case 'LAST_NAME':
+                list.sort(function (a, b) {
+                    return a.lastName.localeCompare(b.lastName);
+                })
+                break;
+            case 'SEARCH':
+                //redo the search to get best serchresult highest up
+                list = filter({
+                    search: this.state.search,
+                    slider: this.state.slider,
+                });
+                break;
+            case 'AVAILABILITY':
+                //to be built later yao!
+
+                break;
+            case 'TIME':                
+                list.sort(function (a, b) {
+                    return JSON.stringify(a.time._d).substring(12, 14) - JSON.stringify(b.time._d).substring(12, 14)
+                    })
+                break;
         }
-        else {
-            console.log('verkar inte finnas en sorterad lista');
-            console.log(this.state.defaultList);
-            
-            this.setState({ listToDisplay: this.state.defaultList })
-        }
+        return list;
     }
 
     sleep(ms){
@@ -95,7 +131,7 @@ export default class HomePage extends Component {
             <div>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>
                 <Slider sliderCallback={this.sliderCallback} />
-                <SortBtn defaultList={this.state.defaultList} sortCallback={this.sortCallback} />
+                <SortBtn search={this.state.search} sortCallback={this.sortCallback} />
                 <BootyList list={this.state.listToDisplay} ></BootyList>
             </div>
         )
