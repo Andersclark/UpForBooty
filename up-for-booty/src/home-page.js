@@ -105,6 +105,27 @@ export default class HomePage extends Component {
         return list;
     }
 
+    sleep(ms){
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+      
+      async updateTime(){
+        while(this._isMounted){
+            let newBooties = this.state.listToDisplay.slice();
+            for (let booty of newBooties){
+              booty.time = moment(booty.time).add(5000, "ms")
+            }
+            this.setState({booties:newBooties});
+            await this.sleep(5000);
+        }
+      }
+      componentDidMount(){
+        this._isMounted = true;
+        this.updateTime();
+      }
+      componentWillUnmount(){
+        this._isMounted = false;
+      }
     render() {
         return (
             <div>
