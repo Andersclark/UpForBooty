@@ -19,6 +19,12 @@ router.route('/delete/:id').delete((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/update/:id').put((req, res) => {
+  Booty.findByIdAndUpdate(req.params.id, req.body)
+  .then(booty => res.json('Updated successfully!'))
+  .catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.route('/add').post((req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
