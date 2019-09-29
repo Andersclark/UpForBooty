@@ -13,6 +13,12 @@ router.route('/view/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/delete/:id').delete((req, res) => {
+  Booty.findByIdAndDelete(req.params.id)
+  .then(booty => res.json('Deleted successfully!'))
+  .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/update/:id').put((req, res) => {
   Booty.findByIdAndUpdate(req.params.id, req.body)
   .then(booty => res.json('Updated successfully!'))
