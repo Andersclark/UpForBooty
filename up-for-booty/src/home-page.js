@@ -26,8 +26,18 @@ export default class HomePage extends Component {
                     booty.time = moment.tz(booty.timezone)
                     return booty;
                 });
-                store.saveToBooties(dataWithTime)
-                this.setState({ listToDisplay: dataWithTime })
+
+                let dataWithStatus=  dataWithTime.map(booty => {
+                    //if blaa blaa
+                    //checking their work and sleeping hours and so on  
+
+                    //hardcoding something in for now
+                    booty.status = 'WORK';
+                    return booty;
+                });
+
+                store.saveToBooties(dataWithStatus)
+                this.setState({ listToDisplay: dataWithStatus })
             })
             .catch((error) => {
                 console.log(error);
@@ -132,7 +142,7 @@ export default class HomePage extends Component {
       componentWillUnmount(){
         this._isMounted = false;
       }
-    render() {
+    render() {        
         return (
             <div>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>

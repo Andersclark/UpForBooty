@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Icon from './icon';
 
 const Booty = props => (
   <tr>
     <td>{props.booty.firstName} {props.booty.lastName}</td>
     <td>{props.booty.timezone}</td>
     <td>{props.booty.time.format("HH:mm")}</td>
+    <Icon status = {props.booty.status} ></Icon>
     <td>
       <Link to={"/view/" + props.booty._id}>View details</Link>
     </td>
