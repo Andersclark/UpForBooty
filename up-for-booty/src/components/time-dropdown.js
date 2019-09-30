@@ -5,42 +5,50 @@ export default class TimezoneDropdown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            times: ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'],
+            startTimes: ['Start', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'],
+            endTimes: ['End', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'],
             isOpen1: false,
             isOpen2: false,
             start: 'Start',
-            end: 'End',
-            sleepRange: []
+            end: 'End'
         };
 
         this.toggle1 = this.toggle1.bind(this);
         this.toggle2 = this.toggle2.bind(this);
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.sleepRange !== prevProps.sleepRange) {
-            this.fetchData(this.props.sleepRange);
-        }
-        this.props.timeDropdownCallback(this.state.sleepRange);
-    }
 
 
     onChange = (event) => {
+        let newRange = [];
+
         if (event.target.className === "startTime dropdown-item") {
-            const newRange = this.state.sleepRange.slice() ;
-            newRange[0] = event.target.value;
             this.setState({
                 start: event.target.value,
-                sleepRange: newRange
             });
+            //if there is a selected time in both dropdows, return that as a number array to parent
+            if (event.target.value !== 'Start' && this.state.end !== 'End') {
+                newRange[0] = Number(event.target.value.substring(0, 2));
+                newRange[1] = Number(this.state.end.substring(0, 2));
+                this.props.timeDropdownCallback(newRange);
+            }
+            else{
+                this.props.timeDropdownCallback(null);
+            }
         }
         else if (event.target.className === "endTime dropdown-item") {
-            const newRange = this.state.sleepRange.slice() ;
-            newRange[1] = event.target.value;
             this.setState({
                 end: event.target.value,
-                sleepRange: newRange
             });
+            //if there is a selected time in both dropdows, return that as a number array to parent
+            if (event.target.value !== 'End' && this.state.start !== 'Start') {
+                newRange[1] =  Number(event.target.value.substring(0, 2));
+                newRange[0] = Number(this.state.start.substring(0, 2));
+                this.props.timeDropdownCallback(newRange);
+            }
+            else{
+                this.props.timeDropdownCallback(null);
+            }
         }
         else {
             console.log('nope');
@@ -60,13 +68,13 @@ export default class TimezoneDropdown extends Component {
     }
 
     startTimeList() {
-        return this.state.times.map(current => {
+        return this.state.startTimes.map(current => {
             return <DropdownItem onClick={this.onChange} value={current} key={current} className="startTime">{current}</DropdownItem>;
         });
     }
 
     endTimeList() {
-        return this.state.times.map(current => {
+        return this.state.endTimes.map(current => {
             return <DropdownItem onClick={this.onChange} value={current} key={current} className="endTime">{current}</DropdownItem>;
         });
     }
