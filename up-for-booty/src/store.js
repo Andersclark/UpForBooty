@@ -1,6 +1,6 @@
 let store = { booties: [] };
 const subscribingFunctions = [];
-
+let language = 'eng';
 
 store.saveToBooties = (data) => {
     store.booties = []
@@ -16,6 +16,15 @@ store.saveToBooties = (data) => {
 
 store.getBooties = () => {
     return store.booties;
+}
+
+store.getLanguage = () => {
+    return language;
+}
+
+store.setLanguage = (lang) => {
+    language = lang;
+    console.log('language', language);
 }
 
 // A subscribing function should be ready to
