@@ -76,8 +76,8 @@ export default class AddBooty extends Component {
       city: this.state.city,
       country: this.state.country,
       timezone: this.state.timezone,
-      sleepRange: this.state.sleepRange,
-      workRange: this.state.workRange
+      asleepTimes: this.state.sleepRange,
+      atWorkTimes: this.state.workRange
     };
 
     axios.post('http://localhost:5000/booty/add', booty)
