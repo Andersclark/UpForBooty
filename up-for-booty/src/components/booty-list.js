@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import store from '../store';
 
 const Booty = props => (
   <tr>
@@ -7,7 +8,7 @@ const Booty = props => (
     <td>{props.booty.timezone}</td>
     <td>{props.booty.time.format("HH:mm")}</td>
     <td>
-      <Link to={"/view/" + props.booty._id}>View details</Link>
+      <Link to={"/view/" + props.booty._id}>Info</Link>
     </td>
   </tr>
 )
@@ -21,15 +22,16 @@ export default class BootyList extends Component {
   } 
 
   render() {
+    let language = store.getLanguage();
     return (
       <div>
-        <h3 className="logo">Booty List</h3>
+        <h3 className="logo">{language === 'eng' ? 'Booty List' : 'Rumpalist ??'}</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th className="logo">Name</th>
-              <th className="logo">Timezone</th>
-              <th className="logo">Current local time</th>
+              <th className="logo">{language === 'eng' ? 'Name' : 'Namn'}</th>
+              <th className="logo">{language === 'eng' ? 'Timezone' : 'Tidszon'}</th>
+              <th className="logo">{language === 'eng' ? 'Local time' : 'Lokaltid'}</th>
               <th></th>
             </tr>
           </thead>
