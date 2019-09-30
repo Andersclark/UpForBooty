@@ -17,8 +17,8 @@ export default class AddBooty extends Component {
       city: '',
       country: '',
       timezone: '',
-      sleepRange: [],
-      workRange: [],
+      sleepRange: null,
+      workRange: null,
       validate: {
         emailState: '',
         phoneNoState: '',
