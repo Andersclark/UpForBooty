@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
+import store from "../store";
 import '../App.css';
 import TimeDropdown from './time-dropdown';
+import { Redirect } from "react-router"
 
 export default class AddBooty extends Component {
+
   constructor(props) {
     super(props);
 
@@ -23,11 +26,26 @@ export default class AddBooty extends Component {
         emailState: '',
         phoneNoState: '',
         country: ''
-      }
+      },
+      language: store.getLanguage(),
+      toHomePage: false
     };
 
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  componentDidMount() {
+    this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store 
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
+  }
+
 
   componentDidUpdate(nextProps) {
     if (nextProps.indivBooty !== this.props.indivBooty) {
@@ -97,25 +115,34 @@ export default class AddBooty extends Component {
     //if props came from the edit booty component, then send an update request, else add a new booty
     if (this.props.indivBooty) {
       axios.put('http://localhost:5000/booty/update/' + this.props.indivBooty._id, booty)
-        .then(res => console.log(res.data));
+        .then(res => {
+          console.log(res.data)
+          this.setState({ toHomePage: true })
+        });
     }
     else {
       axios.post('http://localhost:5000/booty/add', booty)
-        .then(res => console.log(res.data));
+        .then(res => {
+          console.log(res.data)
+          this.setState({ toHomePage: true })
+        });
     }
 
-    window.location = '/';
   }
 
   render() {
+    if (this.state.toHomePage === true) {
+      return <Redirect to='/' />
+    }
     return (
       <Container className="App">
-        <h2 className="logo">Add a booty!</h2>
+        <h2 className="logo">{this.props.indivBooty ? this.state.language === 'eng' ? 'Edit a booty' : 'Redigera en booty' : this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</h2>
+
         <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
           <Row form>
             <Col className="colStyle">
               <FormGroup>
-                <Label>First name: </Label>
+                <Label>{this.state.language === 'eng' ? 'First name:' : 'Förnamn:'}</Label>
                 <Input type="text" required name='firstName' className="form-control"
                   value={this.state.firstName}
                   onChange={this.onChangeHandler}
@@ -125,7 +152,7 @@ export default class AddBooty extends Component {
 
             <Col className="colStyle">
               <FormGroup>
-                <Label>Last name: </Label>
+                <Label>{this.state.language === 'eng' ? 'Last name:' : 'Efternamn:'}</Label>
                 <Input type="text" required name="lastName" className="form-control"
                   value={this.state.lastName}
                   onChange={this.onChangeHandler}
@@ -136,7 +163,7 @@ export default class AddBooty extends Component {
 
           <Col className="colStyle">
             <FormGroup>
-              <Label>Skype handle: </Label>
+              <Label>Skype</Label>
               <Input type="text" required name="skypeHandle" className="form-control"
                 value={this.state.skypeHandle}
                 onChange={this.onChangeHandler}
@@ -146,7 +173,7 @@ export default class AddBooty extends Component {
 
           <Col className="colStyle">
             <FormGroup>
-              <Label>Email address: </Label>
+              <Label>{this.state.language === 'eng' ? 'Email address:' : 'E-postadress:'}</Label>
               <Input type="text" required name="email" className="form-control"
                 value={this.state.email}
                 valid={this.state.validate.emailState === 'has-success'}
@@ -161,7 +188,7 @@ export default class AddBooty extends Component {
 
           <Col className="colStyle">
             <FormGroup>
-              <Label>Phone number: </Label>
+              <Label>{this.state.language === 'eng' ? 'Phone number:' : 'Telefonnummer:'}</Label>
               <Input type="text" required name="phoneNo" className="form-control"
                 value={this.state.phoneNo}
                 valid={this.state.validate.phoneNoState === 'has-success'}
@@ -177,7 +204,7 @@ export default class AddBooty extends Component {
           <Row form>
             <Col md={6}>
               <FormGroup>
-                <Label>City: </Label>
+                <Label>{this.state.language === 'eng' ? 'City:' : 'Stad:'}</Label>
                 <Input type="text" required name="city" className="form-control"
                   value={this.state.city}
                   onChange={this.onChangeHandler}
@@ -189,19 +216,19 @@ export default class AddBooty extends Component {
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label>Sleeping: </Label>
+                <Label>{this.state.language === 'eng' ? 'Sleeping:' : 'Sover:'}</Label>
                 <TimeDropdown timeDropdownCallback={this.sleepTimeDropdownCallback}  />
               </FormGroup>
             </Col>
              <Col md={6}>
               <FormGroup>
-              <Label>Working: </Label>
+              <Label>{this.state.language === 'eng' ? 'Working:' : 'Arbetar:'}</Label>
                 <TimeDropdown timeDropdownCallback={this.workTimeDropdownCallback}/>
               </FormGroup>
             </Col> 
           </Row>
 
-          <Button>Add that booty</Button>
+          <Button>{this.state.language === 'eng' ? 'Submit' : 'Godkänn'}</Button>
         </Form>
       </Container>
     );

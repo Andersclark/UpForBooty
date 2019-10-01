@@ -13,7 +13,7 @@ export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.readFromDB();
-        this.state = { listToDisplay: [] };
+        this.state = { listToDisplay: [] , language: 'eng'};
     }
 
     readFromDB() {
@@ -148,11 +148,20 @@ export default class HomePage extends Component {
     }
     componentDidMount() {
         this._isMounted = true;
+
+        //the method to react on store changes
+        this.languageChange = (lang) => this.setState({language : lang});
+        //subscribe to store 
+        store.subscribeToChanges(this.languageChange)
+
+        //update time
         this.updateTime();
     }
     componentWillUnmount() {
         this._isMounted = false;
+        store.unsubscribeToChanges(this.languageChange);
     }
+    
     render() {
         return (
             <div>
