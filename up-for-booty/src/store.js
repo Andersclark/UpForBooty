@@ -1,6 +1,5 @@
-let store = { booties: [] };
+let store = { booties: [], language: 'eng' };
 const subscribingFunctions = [];
-let language = 'eng';
 
 store.saveToBooties = (data) => {
     store.booties = []
@@ -14,22 +13,27 @@ store.saveToBooties = (data) => {
     }
 }
 
-store.getBooties = () => {
+
+store.setLanguage = (lang) => {
+    store.language = lang;
+
+    let subscriber;
+    // Notify all subscribers of changes
+    for (subscriber of subscribingFunctions) {
+        subscriber(lang);
+    }
+}
+
+store.getBooties = () => {    
     return store.booties;
 }
 
-store.getLanguage = () => {
-    return language;
-}
 
-store.setLanguage = (lang) => {
-    language = lang;
-}
 
 // A subscribing function should be ready to
 // receive the changes and react on them
 store.subscribeToChanges = (func) => {
-    // Add subscribing function
+    // Add subscribing function    
     subscribingFunctions.push(func);
 }
 

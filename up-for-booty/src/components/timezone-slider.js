@@ -14,7 +14,20 @@ export default class TimezoneSlider extends Component {
       lowerBound: 1,
       upperBound: 24,
       value: [1, 24],
+      language: 'eng'
     };
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store 
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
   }
 
   onSliderChange = (value) => {
@@ -25,10 +38,9 @@ export default class TimezoneSlider extends Component {
   }
   
   render() {
-    let language = store.getLanguage();
     return (
       <div>
-        <label>{language === 'eng' ? 'Choose a time!' : 'Välja en tid!'}</label>
+        <label>{this.state.language === 'eng' ? 'Choose a time!' : 'Välja en tid!'}</label>
         <Range min={1} max={24} allowCross={false} value={this.state.value} onAfterChange={this.onSliderChange} onChange={this.onSliderChange} tipFormatter={value => `${value}`} />
       </div>
     );

@@ -3,9 +3,23 @@ import { Link } from 'react-router-dom';
 import store from "../store";
 
 export default class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { language: 'eng'};
+  }
+  componentDidMount() {
+    this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store 
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
+  }
 
   render() {
-    let language = store.getLanguage();
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
         <Link to="/" className="navbar-brand logo" id="bold">BOOTY</Link>
@@ -15,7 +29,7 @@ export default class Navbar extends Component {
           <Link to="/" className="nav-link logo">Booties</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/add" className="nav-link logo">{language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</Link>
+          <Link to="/add" className="nav-link logo">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</Link>
           </li>
         </ul>
         </div>

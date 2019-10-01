@@ -22,11 +22,25 @@ export default class AddBooty extends Component {
         emailState: '',
         phoneNoState: '',
         country: ''
-      }
+      },
+      language: 'eng'
     };
 
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  componentDidMount() {
+    this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store 
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
+  }
+
 
   componentDidUpdate(nextProps) {
     if (nextProps.indivBooty !== this.props.indivBooty) {
@@ -98,16 +112,15 @@ export default class AddBooty extends Component {
   }
 
   render() {
-    let language = store.getLanguage();
     return (
       <Container className="App">
-        <h2 className="logo">{this.props.indivBooty ? language === 'eng' ? 'Edit a booty' : 'Redigera en booty' : language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</h2>
-       
-       <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
+        <h2 className="logo">{this.props.indivBooty ? this.state.language === 'eng' ? 'Edit a booty' : 'Redigera en booty' : this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</h2>
+
+        <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
           <Row form>
             <Col className="colStyle">
               <FormGroup>
-                <Label>{language === 'eng' ? 'First name:' : 'Förnamn:'}</Label>
+                <Label>{this.state.language === 'eng' ? 'First name:' : 'Förnamn:'}</Label>
                 <Input type="text" required name='firstName' className="form-control"
                   value={this.state.firstName}
                   onChange={this.onChangeHandler}
@@ -117,7 +130,7 @@ export default class AddBooty extends Component {
 
             <Col className="colStyle">
               <FormGroup>
-                <Label>{language === 'eng' ? 'Last name:' : 'Efternamn:'}</Label>
+                <Label>{this.state.language === 'eng' ? 'Last name:' : 'Efternamn:'}</Label>
                 <Input type="text" required name="lastName" className="form-control"
                   value={this.state.lastName}
                   onChange={this.onChangeHandler}
@@ -138,7 +151,7 @@ export default class AddBooty extends Component {
 
           <Col className="colStyle">
             <FormGroup>
-              <Label>{language === 'eng' ? 'Email address:' : 'E-postadress:'}</Label>
+              <Label>{this.state.language === 'eng' ? 'Email address:' : 'E-postadress:'}</Label>
               <Input type="text" required name="email" className="form-control"
                 value={this.state.email}
                 valid={this.state.validate.emailState === 'has-success'}
@@ -153,7 +166,7 @@ export default class AddBooty extends Component {
 
           <Col className="colStyle">
             <FormGroup>
-              <Label>{language === 'eng' ? 'Phone number:' : 'Telefonnummer:'}</Label>
+              <Label>{this.state.language === 'eng' ? 'Phone number:' : 'Telefonnummer:'}</Label>
               <Input type="text" required name="phoneNo" className="form-control"
                 value={this.state.phoneNo}
                 valid={this.state.validate.phoneNoState === 'has-success'}
@@ -169,7 +182,7 @@ export default class AddBooty extends Component {
           <Row form>
             <Col md={6}>
               <FormGroup>
-                <Label>{language === 'eng' ? 'City:' : 'Stad:'}</Label>
+                <Label>{this.state.language === 'eng' ? 'City:' : 'Stad:'}</Label>
                 <Input type="text" required name="city" className="form-control"
                   value={this.state.city}
                   onChange={this.onChangeHandler}
@@ -178,7 +191,7 @@ export default class AddBooty extends Component {
             </Col>
           </Row>
 
-          <Button>{language === 'eng' ? 'Submit' : 'Godkänn'}</Button>
+          <Button>{this.state.language === 'eng' ? 'Submit' : 'Godkänn'}</Button>
         </Form>
       </Container>
     );

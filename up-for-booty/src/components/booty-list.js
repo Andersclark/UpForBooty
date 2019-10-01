@@ -14,6 +14,10 @@ const Booty = props => (
 )
 
 export default class BootyList extends Component {
+  constructor(props){
+    super(props);
+    this.state= {language: 'eng'}
+  }
 
   bootyList() {
     return this.props.list.map(currentBooty => {
@@ -21,17 +25,28 @@ export default class BootyList extends Component {
     })
   } 
 
+  componentDidMount() {
+    this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store 
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
+  }
+
   render() {
-    let language = store.getLanguage();
     return (
       <div>
-        <h3 className="logo">{language === 'eng' ? 'Booty List' : 'Bootylista'}</h3>
+        <h3 className="logo">{this.state.language === 'eng' ? 'Booty List' : 'Bootylista'}</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th className="logo">{language === 'eng' ? 'Name' : 'Namn'}</th>
-              <th className="logo">{language === 'eng' ? 'Timezone' : 'Tidszon'}</th>
-              <th className="logo">{language === 'eng' ? 'Local time' : 'Lokaltid'}</th>
+              <th className="logo">{this.state.language === 'eng' ? 'Name' : 'Namn'}</th>
+              <th className="logo">{this.state.language === 'eng' ? 'Timezone' : 'Tidszon'}</th>
+              <th className="logo">{this.state.language === 'eng' ? 'Local time' : 'Lokaltid'}</th>
               <th></th>
             </tr>
           </thead>

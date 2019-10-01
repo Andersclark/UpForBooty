@@ -7,7 +7,7 @@ export default class BootyDetails extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { booty: [] };
+    this.state = { booty: [], language: 'eng' };
   }
 
   componentDidMount() {
@@ -18,20 +18,29 @@ export default class BootyDetails extends Component {
       .catch((error) => {
         console.log(error);
       })
+
+      this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store 
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
   }
 
   render() {
-    let language = store.getLanguage();
     return (
       <div className="container">
         <div className="bootyDeets">
           <h4>{this.state.booty.firstName} {this.state.booty.lastName}</h4>
-          <p><i className="fas fa-phone-alt fontawesome"></i>{language === 'eng' ? 'Phone number: ' : 'Telefonnummer: '} {this.state.booty.phoneNo}</p>
+          <p><i className="fas fa-phone-alt fontawesome"></i>{this.state.language === 'eng' ? 'Phone number: ' : 'Telefonnummer: '} {this.state.booty.phoneNo}</p>
           <a href="https://www.skype.com/sv/"><p><i className="fab fa-skype fontawesome"></i>Skype: {this.state.booty.skypeHandle}</p></a>
-          <p><i className="far fa-envelope-open fontawesome"></i>{language === 'eng' ? 'Email: ' : 'E-postadress: '} {this.state.booty.email}</p>
-          <p><i className="fas fa-home fontawesome"></i>{language === 'eng' ? 'City: ' : 'Stad: '} {this.state.booty.city}</p>
-          <p><i className="fas fa-clock fontawesome"></i>{language === 'eng' ? 'Timezone: ' : 'Tidszon: '} {this.state.booty.timezone}</p>
-          <Link to={"/edit/" + this.state.booty._id}>{language === 'eng' ? 'Edit' : 'Redigera'}</Link>
+          <p><i className="far fa-envelope-open fontawesome"></i>{this.state.language === 'eng' ? 'Email: ' : 'E-postadress: '} {this.state.booty.email}</p>
+          <p><i className="fas fa-home fontawesome"></i>{this.state.language === 'eng' ? 'City: ' : 'Stad: '} {this.state.booty.city}</p>
+          <p><i className="fas fa-clock fontawesome"></i>{this.state.language === 'eng' ? 'Timezone: ' : 'Tidszon: '} {this.state.booty.timezone}</p>
+          <Link to={"/edit/" + this.state.booty._id}>{this.state.language === 'eng' ? 'Edit' : 'Redigera'}</Link>
         </div>
       </div>
     );
