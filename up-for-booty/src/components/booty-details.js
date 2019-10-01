@@ -7,7 +7,7 @@ export default class BootyDetails extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { booty: [], language: 'eng' };
+    this.state = { booty: [], language: store.getLanguage() };
   }
 
   componentDidMount() {

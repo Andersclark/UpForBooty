@@ -6,11 +6,6 @@ store.saveToBooties = (data) => {
     data.forEach(element => {
         store.booties.push(element);
     });
-    let subscriber;
-    // Notify all subscribers of changes
-    for (subscriber of subscribingFunctions) {
-        subscriber(store.booties);
-    }
 }
 
 
@@ -24,8 +19,12 @@ store.setLanguage = (lang) => {
     }
 }
 
-store.getBooties = () => {    
+store.getBooties = () => {        
     return store.booties;
+}
+
+store.getLanguage = () => {    
+    return store.language;
 }
 
 

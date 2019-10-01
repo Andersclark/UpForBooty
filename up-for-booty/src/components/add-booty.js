@@ -23,7 +23,7 @@ export default class AddBooty extends Component {
         phoneNoState: '',
         country: ''
       },
-      language: 'eng'
+      language: store.getLanguage()
     };
 
     this.onSubmit = this.onSubmit.bind(this);

@@ -5,7 +5,7 @@ import store from '../store';
 export default class SearchField extends Component {
     constructor(props) {
         super(props);
-        this.state = { language: 'eng' };
+        this.state = { language: store.getLanguage() };
     }
     componentDidMount() {
         this._isMounted = true;

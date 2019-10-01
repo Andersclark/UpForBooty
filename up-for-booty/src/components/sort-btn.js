@@ -5,7 +5,7 @@ import store from '../store';
 export default class SortBtn extends Component {
     constructor(props) {
         super(props);
-        this.state = { sortBy: 'AVAILABILITY', language: 'eng'};
+        this.state = { sortBy: 'AVAILABILITY', language: store.getLanguage()};
         this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
     }
     componentDidMount() {

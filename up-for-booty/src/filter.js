@@ -1,8 +1,7 @@
 import store from './store';
 
-
-let filter = (data) => {
-        let list = store.getBooties();
+let filter = (data) => {        
+        let list = store.getBooties();        
 
     //filter list based on the search-input
     if (data.search) {

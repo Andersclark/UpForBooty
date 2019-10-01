@@ -16,7 +16,7 @@ const Booty = props => (
 export default class BootyList extends Component {
   constructor(props){
     super(props);
-    this.state= {language: 'eng'}
+    this.state= {language: store.getLanguage()}
   }
 
   bootyList() {

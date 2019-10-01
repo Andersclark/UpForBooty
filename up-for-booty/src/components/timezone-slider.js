@@ -14,7 +14,7 @@ export default class TimezoneSlider extends Component {
       lowerBound: 1,
       upperBound: 24,
       value: [1, 24],
-      language: 'eng'
+      language: store.getLanguage()
     };
   }
 

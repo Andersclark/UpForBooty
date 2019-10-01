@@ -8,7 +8,6 @@ import moment from 'moment-timezone';
 import Slider from './components/timezone-slider'
 import SortBtn from './components/sort-btn'
 import filter from './filter';
-import { Button, ButtonGroup } from 'reactstrap';
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -25,7 +24,7 @@ export default class HomePage extends Component {
                     booty.time = moment.tz(booty.timezone)
                     return booty;
                 });
-                //store.saveToBooties(dataWithTime)
+                store.saveToBooties(dataWithTime)
                 this.setState({ listToDisplay: dataWithTime })
             })
             .catch((error) => {
@@ -143,10 +142,6 @@ export default class HomePage extends Component {
     render() {
         return (
             <div>
-                <ButtonGroup>
-                    <Button onClick={() => store.setLanguage('eng')}>English</Button>
-                    <Button onClick={() => store.setLanguage('sve')}>Svenska</Button>
-                </ButtonGroup>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>
                 <Slider sliderCallback={this.sliderCallback} />
                 <SortBtn search={this.state.search} sortCallback={this.sortCallback} />
