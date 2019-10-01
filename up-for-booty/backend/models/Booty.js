@@ -12,7 +12,7 @@ let bootySchema = new Schema({
     country: String,
     timezone: String,
     asleepTimes: [Number],
-    atWorkTimes: [Number]
+    atWorkTimes: [Number],
     picture: String
 });
 

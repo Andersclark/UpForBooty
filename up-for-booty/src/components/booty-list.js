@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Icon from './icon';
 import store from '../store';
-import { BrowserRouter as Route } from 'react-router-dom';
 import {
   Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button

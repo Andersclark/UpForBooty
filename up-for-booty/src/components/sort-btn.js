@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Label } from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 import store from '../store';
 
 export default class SortBtn extends Component {
