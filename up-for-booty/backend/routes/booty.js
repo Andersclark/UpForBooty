@@ -34,9 +34,11 @@ router.route('/add').post((req, res) => {
   const city = req.body.city;
   const country = req.body.country;
   const timezone = req.body.timezone;
+  const asleepTimes = req.body.asleepTimes;
+  const atWorkTimes = req.body.atWorkTimes;
 
   const newBooty = new Booty({
-    firstName, lastName, phoneNo, skypeHandle, email, city, country, timezone
+    firstName, lastName, phoneNo, skypeHandle, email, city, country, timezone, asleepTimes, atWorkTimes
   });
 
   newBooty.save()
