@@ -24,7 +24,6 @@ store.getLanguage = () => {
 
 store.setLanguage = (lang) => {
     language = lang;
-    console.log('language', language);
 }
 
 // A subscribing function should be ready to

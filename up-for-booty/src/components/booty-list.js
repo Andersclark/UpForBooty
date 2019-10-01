@@ -8,8 +8,7 @@ const Booty = props => (
     <td>{props.booty.timezone}</td>
     <td>{props.booty.time.format("HH:mm")}</td>
     <td>
-      <Link to={"/view/" + props.booty._id}>View details</Link>
-      <Link to={"/edit/" + props.booty._id}>Edit details</Link>
+      <Link to={"/view/" + props.booty._id}>Info</Link>
     </td>
   </tr>
 )
