@@ -24,10 +24,13 @@ body {
 .bootycard {
   margin: 2%;
   padding: 2%;
+  min-height: 30vh;
+  max-height: 40vh;
 }
 .bootycardheader {
   margin-top: 2%;
   font-weight: 700;
+  font-size: 1.2em;
 }
 
 .searchfield {
@@ -37,6 +40,7 @@ body {
 
 .bootyslider {
   margin: 15%;
+  max-width: 60vw;
 }
 
 .bootyheader {
