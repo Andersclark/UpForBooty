@@ -192,7 +192,6 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
-
             <Col md={6}>
               <FormGroup>
                 <Label>{this.state.language === 'eng' ? 'City:' : 'Stad:'}</Label>
