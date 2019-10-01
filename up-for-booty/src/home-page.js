@@ -25,6 +25,7 @@ export default class HomePage extends Component {
                     return booty;
                 });
 
+                //add status of the booties
                 let dataWithStatus = dataWithTime.map(booty => {
                     //check working and sleeping hours 
                     let currTime = JSON.stringify(booty.time._d).substring(12, 14);
@@ -44,6 +45,9 @@ export default class HomePage extends Component {
                     return booty;
                 });
 
+                //sort the list on default (availability)
+                dataWithStatus = this.sort(dataWithStatus, 'AVAILABILITY')
+                //save and set the state
                 store.saveToBooties(dataWithStatus)
                 this.setState({ listToDisplay: dataWithStatus })
             })
@@ -60,10 +64,6 @@ export default class HomePage extends Component {
 
         //sort the list
         if (this.state.sort && this.state.sort !== 'SEARCH') {
-            console.log('tossing it to the sorting algorthm');
-            console.log(this.state.sort);
-
-
             newList = this.sort(newList, this.state.sort);
         }
 
@@ -112,7 +112,10 @@ export default class HomePage extends Component {
                 });
                 break;
             case 'AVAILABILITY':
-                //to be built later yao!
+                let working = list.filter(booty => booty.status === 'WORK' )                
+                let sleeping = list.filter(booty => booty.status === 'SLEEP' )
+                let available = list.filter(booty => booty.status !== 'SLEEP' && booty.status !== 'WORK' )
+                list = available.concat(sleeping, working);
 
                 break;
             case 'TIME':
