@@ -6,7 +6,7 @@ import '../App.css';
 export default class AddBooty extends Component {
   constructor(props) {
     super(props);
-
+    this.timeout = null;
     this.state = {
       firstName: '',
       lastName: '',
@@ -22,16 +22,38 @@ export default class AddBooty extends Component {
         country: ''
       }
     };
-
     this.onSubmit = this.onSubmit.bind(this);
   }
-
   onChangeHandler = (event) => {
     let nam = event.target.name;
     let val = event.target.value;
     this.setState({ [nam]: val });
   }
 
+
+ onCityChange(event){
+    console.log('oncitychange')
+    let city = event.target.value;
+    this.setState({'city': city});
+    clearTimeout(this.timeout);
+    let timezone = '';
+    let self= this;
+    
+    this.timeout = setTimeout(async function(){
+      timezone = await axios.get('http://localhost:5000/place/time/' + city)
+      console.log(timezone.data);
+      self.setState({timezone: timezone.data})
+    }, 2000);
+  }
+    
+      //  this.setState({ 'timezone': timezone }))}
+
+  /* 
+  getTimezone(city){
+  axios.get('http://localhost:5000/place/time/' + city)
+    .then(response => {
+      console.log(response)})}
+ */
   validateEmail(e) {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const { validate } = this.state;
@@ -42,7 +64,6 @@ export default class AddBooty extends Component {
     }
     this.setState({ validate })
   }
-
   validatePhoneNo(e) {
     const phoneRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4,})$/;
     const { validate } = this.state;
@@ -172,8 +193,9 @@ export default class AddBooty extends Component {
                 <Label>City: </Label>
                 <Input type="text" required name="city" className="form-control"
                   value={this.state.city}
-                  onChange={this.onChangeHandler}
+                  onChange={(e) => {this.onCityChange(e)}}
                 />
+                <p>Timezone: {this.state.timezone}</p>
               </FormGroup>
             </Col>
           </Row>
