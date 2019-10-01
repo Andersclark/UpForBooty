@@ -26,22 +26,15 @@ export default class HomePage extends Component {
                 });
 
                 let dataWithStatus = dataWithTime.map(booty => {
-                    //if blaa blaa
-                    //checking their work and sleeping hours and so on  
-
+                    //check working and sleeping hours 
                     let currTime = JSON.stringify(booty.time._d).substring(12, 14);
-                    console.log('currTime',currTime);
-                    console.log('sleeping', booty.asleepTimes);
 
-                    //are they working?
                     if(currTime >= booty.atWorkTimes[0] && currTime < booty.atWorkTimes[1] ){
                         booty.status = 'WORK';                        
-                    }else if (currTime )
+                    } else if (currTime >= booty.asleepTimes[0] && currTime < booty.asleepTimes[1]) {
+                        booty.status = 'SLEEP'
+                    }
                     
-                    
-
-                    //hardcoding something in for now
-                    booty.status = 'WORK';
                     return booty;
                 });
 
