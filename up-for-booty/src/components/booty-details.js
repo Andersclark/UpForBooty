@@ -18,6 +18,20 @@ export default class BootyDetails extends Component {
       })
   }
 
+  displayWorkTimes(){
+    if(this.state.booty.atWorkTimes && this.state.booty.atWorkTimes.length > 0){
+      let timeToDisplay = this.state.booty.atWorkTimes[0]+':00 - '+ this.state.booty.atWorkTimes[1]+':00' 
+      return <p><i className="fas fa-briefcase fontawesome"></i>Working Hours: {timeToDisplay}</p>
+    }
+  }
+
+  displaySleepTimes(){
+    if(this.state.booty.asleepTimes && this.state.booty.asleepTimes.length > 0){
+      let timeToDisplay = this.state.booty.asleepTimes[0]+':00 - '+ this.state.booty.asleepTimes[1]+':00'
+      return <p><i className="fas fa-bed fontawesome"></i>Sleeping Hours: {timeToDisplay}</p>
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -28,6 +42,8 @@ export default class BootyDetails extends Component {
         <p><i className="far fa-envelope-open fontawesome"></i>Email: {this.state.booty.email}</p>
         <p><i className="fas fa-home fontawesome"></i>Location: {this.state.booty.city}, {this.state.booty.country}</p>
         <p><i className="fas fa-clock fontawesome"></i>Timezone: {this.state.booty.timezone}</p>
+        {this.displayWorkTimes()}
+        {this.displaySleepTimes()}
       </div>
       </div>
     );
