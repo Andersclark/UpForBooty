@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Icon from './icon';
+import store from '../store';
 import { BrowserRouter as Route } from 'react-router-dom';
 import {
   Row, Col, Card, CardImg, CardText, CardBody,
@@ -6,6 +9,7 @@ import {
 } from 'reactstrap';
 
 const Booty = props => (
+
       <Col sm="6" lg="3">
         <Card sm="6" lg="3" className="bootycard">
             <CardImg top width="100%" height="40%" src={"http://localhost:5000/img/" + props.booty.picture + ".jpg"} alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
@@ -23,6 +27,10 @@ const Booty = props => (
 )
 
 export default class BootyList extends Component {
+  constructor(props){
+    super(props);
+    this.state= {language: store.getLanguage()}
+  }
 
   bootyList() {
     return this.props.list.map(currentBooty => {
@@ -30,11 +38,23 @@ export default class BootyList extends Component {
     })
   } 
 
+  componentDidMount() {
+    this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store 
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
+  }
+
   render() {
     return (
-      <Row>
+        <Row>
             { this.bootyList() }
-      </Row>
+        </Row>
     )
   }
 }

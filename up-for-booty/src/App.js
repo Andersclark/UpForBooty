@@ -6,6 +6,7 @@ import HomePage from "./home-page";
 import AddBooty from "./components/add-booty";
 import BootyDetails from "./components/booty-details";
 import './App.css';
+import EditDetails from "./components/edit-booty-details";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" exact component={HomePage} />
         <Route path="/add" component={AddBooty} />
         <Route path="/view/:id" component={BootyDetails} />
+        <Route path="/edit/:id" component={EditDetails} />
       </div>
     </Router>
   );
