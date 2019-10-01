@@ -10,6 +10,7 @@ const Booty = props => (
     <Icon status = {props.booty.status} ></Icon>
     <td>
       <Link to={"/view/" + props.booty._id}>View details</Link>
+      <Link to={"/edit/" + props.booty._id}>Edit details</Link>
     </td>
   </tr>
 )

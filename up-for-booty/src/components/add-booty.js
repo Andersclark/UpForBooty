@@ -29,6 +29,20 @@ export default class AddBooty extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidUpdate(nextProps) {
+    if (nextProps.indivBooty !== this.props.indivBooty) {
+      this.setState({
+        firstName: this.props.indivBooty.firstName,
+        lastName: this.props.indivBooty.lastName,
+        phoneNo: this.props.indivBooty.phoneNo,
+        skypeHandle: this.props.indivBooty.skypeHandle,
+        email: this.props.indivBooty.email,
+        city: this.props.indivBooty.city,
+        timezone: this.props.indivBooty.timezone,
+      });
+    };
+  }
+
   onChangeHandler = (event) => {
     let nam = event.target.name;
     let val = event.target.value;
@@ -80,10 +94,15 @@ export default class AddBooty extends Component {
       atWorkTimes: this.state.workRange
     };
 
-    axios.post('http://localhost:5000/booty/add', booty)
-      .then(res => console.log(res.data));
-
-    console.log('submitted ', booty)
+    //if props came from the edit booty component, then send an update request, else add a new booty
+    if (this.props.indivBooty) {
+      axios.put('http://localhost:5000/booty/update/' + this.props.indivBooty._id, booty)
+        .then(res => console.log(res.data));
+    }
+    else {
+      axios.post('http://localhost:5000/booty/add', booty)
+        .then(res => console.log(res.data));
+    }
 
     window.location = '/';
   }
@@ -156,18 +175,6 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
-            <Col>
-              <FormGroup>
-                <Label>Country: </Label>
-                <Input type="text" required name="country" className="form-control"
-                  value={this.state.country}
-                  onChange={(e) => {
-                    this.onChangeHandler(e)
-                  }}
-                />
-              </FormGroup>
-            </Col>
-
             <Col md={6}>
               <FormGroup>
                 <Label>City: </Label>
