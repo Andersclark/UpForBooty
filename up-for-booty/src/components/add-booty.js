@@ -120,7 +120,7 @@ export default class AddBooty extends Component {
         .then(res => console.log(res.data));
     }
 
-    window.location = '/';
+    this.props.history.push('/')
   }
 
   render() {
