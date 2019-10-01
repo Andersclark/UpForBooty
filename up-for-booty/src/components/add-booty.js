@@ -4,6 +4,7 @@ import axios from 'axios';
 import store from "../store";
 import '../App.css';
 import TimeDropdown from './time-dropdown';
+import { Redirect } from "react-router"
 
 export default class AddBooty extends Component {
 
@@ -26,7 +27,8 @@ export default class AddBooty extends Component {
         phoneNoState: '',
         country: ''
       },
-      language: store.getLanguage()
+      language: store.getLanguage(),
+      toHomePage: false
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -120,10 +122,13 @@ export default class AddBooty extends Component {
         .then(res => console.log(res.data));
     }
 
-    this.props.history.push('/')
+    this.setState({toHomePage: true})
   }
 
   render() {
+    if (this.state.toHomePage === true) {
+      return <Redirect to='/' />
+    }
     return (
       <Container className="App">
         <h2 className="logo">{this.props.indivBooty ? this.state.language === 'eng' ? 'Edit a booty' : 'Redigera en booty' : this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</h2>
