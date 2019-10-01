@@ -175,18 +175,6 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
-            <Col>
-              <FormGroup>
-                <Label>Country: </Label>
-                <Input type="text" required name="country" className="form-control"
-                  value={this.state.country}
-                  onChange={(e) => {
-                    this.onChangeHandler(e)
-                  }}
-                />
-              </FormGroup>
-            </Col>
-
             <Col md={6}>
               <FormGroup>
                 <Label>City: </Label>
