@@ -99,11 +99,11 @@ export default class AddBooty extends Component {
 
   render() {
     let language = store.getLanguage();
-
     return (
       <Container className="App">
-        <h2 className="logo">{language === 'eng' ? 'Booty Details' : 'Rumpadetaljer (lololol)'}</h2>
-        <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
+        <h2 className="logo">{this.props.indivBooty ? language === 'eng' ? 'Edit a booty' : 'Redigera en booty' : language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</h2>
+       
+       <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
           <Row form>
             <Col className="colStyle">
               <FormGroup>
@@ -128,7 +128,7 @@ export default class AddBooty extends Component {
 
           <Col className="colStyle">
             <FormGroup>
-              <Label>{language === 'eng' ? 'Skype handle:' : 'Skypenamn:'}</Label>
+              <Label>Skype</Label>
               <Input type="text" required name="skypeHandle" className="form-control"
                 value={this.state.skypeHandle}
                 onChange={this.onChangeHandler}

@@ -25,7 +25,7 @@ export default class BootyList extends Component {
     let language = store.getLanguage();
     return (
       <div>
-        <h3 className="logo">{language === 'eng' ? 'Booty List' : 'Rumpalist ??'}</h3>
+        <h3 className="logo">{language === 'eng' ? 'Booty List' : 'Bootylista'}</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>
