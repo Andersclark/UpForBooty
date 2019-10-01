@@ -29,12 +29,18 @@ export default class HomePage extends Component {
                     //check working and sleeping hours 
                     let currTime = JSON.stringify(booty.time._d).substring(12, 14);
 
-                    if(currTime >= booty.atWorkTimes[0] && currTime < booty.atWorkTimes[1] ){
-                        booty.status = 'WORK';                        
-                    } else if (currTime >= booty.asleepTimes[0] && currTime < booty.asleepTimes[1]) {
-                        booty.status = 'SLEEP'
+                    if (booty.atWorkTimes) {
+                        if (currTime >= booty.atWorkTimes[0] && currTime < booty.atWorkTimes[1]) {
+                            booty.status = 'WORK';
+                        }
                     }
-                    
+
+                    if (booty.asleepTimes) {
+                        if (currTime >= booty.asleepTimes[0] && currTime < booty.asleepTimes[1]) {
+                            booty.status = 'SLEEP'
+                        }
+                    }
+
                     return booty;
                 });
 
