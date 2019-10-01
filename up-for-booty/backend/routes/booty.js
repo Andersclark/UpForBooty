@@ -13,6 +13,12 @@ router.route('/view/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/delete/:id').delete((req, res) => {
+  Booty.findByIdAndDelete(req.params.id)
+  .then(booty => res.json('Deleted successfully!'))
+  .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/update/:id').put((req, res) => {
   Booty.findByIdAndUpdate(req.params.id, req.body)
   .then(booty => res.json('Updated successfully!'))
@@ -28,9 +34,11 @@ router.route('/add').post((req, res) => {
   const city = req.body.city;
   const country = req.body.country;
   const timezone = req.body.timezone;
+  const asleepTimes = req.body.asleepTimes;
+  const atWorkTimes = req.body.atWorkTimes;
 
   const newBooty = new Booty({
-    firstName, lastName, phoneNo, skypeHandle, email, city, country, timezone
+    firstName, lastName, phoneNo, skypeHandle, email, city, country, timezone, asleepTimes, atWorkTimes
   });
 
   newBooty.save()

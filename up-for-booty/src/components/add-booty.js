@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
 import '../App.css';
+import TimeDropdown from './time-dropdown';
 
 export default class AddBooty extends Component {
   constructor(props) {
@@ -16,6 +17,8 @@ export default class AddBooty extends Component {
       city: '',
       country: '',
       timezone: '',
+      sleepRange: null,
+      workRange: null,
       validate: {
         emailState: '',
         phoneNoState: '',
@@ -24,6 +27,20 @@ export default class AddBooty extends Component {
     };
 
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidUpdate(nextProps) {
+    if (nextProps.indivBooty !== this.props.indivBooty) {
+      this.setState({
+        firstName: this.props.indivBooty.firstName,
+        lastName: this.props.indivBooty.lastName,
+        phoneNo: this.props.indivBooty.phoneNo,
+        skypeHandle: this.props.indivBooty.skypeHandle,
+        email: this.props.indivBooty.email,
+        city: this.props.indivBooty.city,
+        timezone: this.props.indivBooty.timezone,
+      });
+    };
   }
 
   onChangeHandler = (event) => {
@@ -54,15 +71,12 @@ export default class AddBooty extends Component {
     }
   }
 
-  /* validateCountry(e) {
-    const countries = ['sweden', 'us', 'ireland'];
-    if(countries.includes(e.target.value)) {
-      console.log('country!');
-    }
-    else {
-      console.log('not a country');
-    }
-  } */
+  sleepTimeDropdownCallback = (timeRange) => {
+    this.setState({sleepRange: timeRange})
+  }
+  workTimeDropdownCallback = (timeRange) => {    
+    this.setState({workRange: timeRange})
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -75,13 +89,20 @@ export default class AddBooty extends Component {
       email: this.state.email,
       city: this.state.city,
       country: this.state.country,
-      timezone: this.state.timezone
+      timezone: this.state.timezone,
+      asleepTimes: this.state.sleepRange,
+      atWorkTimes: this.state.workRange
     };
 
-    axios.post('http://localhost:5000/booty/add', booty)
-      .then(res => console.log(res.data));
-
-    console.log('submitted ', booty)
+    //if props came from the edit booty component, then send an update request, else add a new booty
+    if (this.props.indivBooty) {
+      axios.put('http://localhost:5000/booty/update/' + this.props.indivBooty._id, booty)
+        .then(res => console.log(res.data));
+    }
+    else {
+      axios.post('http://localhost:5000/booty/add', booty)
+        .then(res => console.log(res.data));
+    }
 
     window.location = '/';
   }
@@ -154,19 +175,6 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
-          <Col>
-              <FormGroup>
-                <Label>Country: </Label>
-                <Input type="text" required name="country" className="form-control"
-                  value={this.state.country}
-                  onChange={(e) => {
-                    /* this.validateCountry(e) */
-                    this.onChangeHandler(e)
-                  }}
-                />
-              </FormGroup>
-            </Col>
-
             <Col md={6}>
               <FormGroup>
                 <Label>City: </Label>
@@ -178,7 +186,20 @@ export default class AddBooty extends Component {
             </Col>
           </Row>
 
-
+          <Row>
+            <Col md={6}>
+              <FormGroup>
+                <Label>Sleeping: </Label>
+                <TimeDropdown timeDropdownCallback={this.sleepTimeDropdownCallback}  />
+              </FormGroup>
+            </Col>
+             <Col md={6}>
+              <FormGroup>
+              <Label>Working: </Label>
+                <TimeDropdown timeDropdownCallback={this.workTimeDropdownCallback}/>
+              </FormGroup>
+            </Col> 
+          </Row>
 
           <Button>Add that booty</Button>
         </Form>
