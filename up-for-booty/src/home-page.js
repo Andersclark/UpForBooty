@@ -109,7 +109,7 @@ export default class HomePage extends Component {
         return list;
     }
 
-    sleep(ms){
+    sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
       }
       
@@ -119,17 +119,17 @@ export default class HomePage extends Component {
             for (let booty of newBooties){
               booty.time = moment(booty.time).add(5000, "ms")
             }
-            this.setState({booties:newBooties});
+            this.setState({ booties: newBooties });
             await this.sleep(5000);
         }
-      }
-      componentDidMount(){
+    }
+    componentDidMount() {
         this._isMounted = true;
         this.updateTime();
-      }
-      componentWillUnmount(){
+    }
+    componentWillUnmount() {
         this._isMounted = false;
-      }
+    }
     render() {
         return (
             <div>

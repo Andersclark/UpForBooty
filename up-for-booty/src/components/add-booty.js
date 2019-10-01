@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import axios from 'axios';
 import '../App.css';
+import TimeDropdown from './time-dropdown';
 
 export default class AddBooty extends Component {
   constructor(props) {
@@ -16,6 +17,8 @@ export default class AddBooty extends Component {
       city: '',
       country: '',
       timezone: '',
+      sleepRange: null,
+      workRange: null,
       validate: {
         emailState: '',
         phoneNoState: '',
@@ -68,6 +71,13 @@ export default class AddBooty extends Component {
     }
   }
 
+  sleepTimeDropdownCallback = (timeRange) => {
+    this.setState({sleepRange: timeRange})
+  }
+  workTimeDropdownCallback = (timeRange) => {    
+    this.setState({workRange: timeRange})
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -79,7 +89,9 @@ export default class AddBooty extends Component {
       email: this.state.email,
       city: this.state.city,
       country: this.state.country,
-      timezone: this.state.timezone
+      timezone: this.state.timezone,
+      asleepTimes: this.state.sleepRange,
+      atWorkTimes: this.state.workRange
     };
 
     //if props came from the edit booty component, then send an update request, else add a new booty
@@ -163,6 +175,18 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
+            <Col>
+              <FormGroup>
+                <Label>Country: </Label>
+                <Input type="text" required name="country" className="form-control"
+                  value={this.state.country}
+                  onChange={(e) => {
+                    this.onChangeHandler(e)
+                  }}
+                />
+              </FormGroup>
+            </Col>
+
             <Col md={6}>
               <FormGroup>
                 <Label>City: </Label>
@@ -172,6 +196,21 @@ export default class AddBooty extends Component {
                 />
               </FormGroup>
             </Col>
+          </Row>
+
+          <Row>
+            <Col md={6}>
+              <FormGroup>
+                <Label>Sleeping: </Label>
+                <TimeDropdown timeDropdownCallback={this.sleepTimeDropdownCallback}  />
+              </FormGroup>
+            </Col>
+             <Col md={6}>
+              <FormGroup>
+              <Label>Working: </Label>
+                <TimeDropdown timeDropdownCallback={this.workTimeDropdownCallback}/>
+              </FormGroup>
+            </Col> 
           </Row>
 
           <Button>Add that booty</Button>
