@@ -1,27 +1,38 @@
-let store = { booties: [] };
+let store = { booties: [], language: 'eng' };
 const subscribingFunctions = [];
-
 
 store.saveToBooties = (data) => {
     store.booties = []
     data.forEach(element => {
         store.booties.push(element);
     });
+}
+
+
+store.setLanguage = (lang) => {
+    store.language = lang;
+
     let subscriber;
     // Notify all subscribers of changes
     for (subscriber of subscribingFunctions) {
-        subscriber(store.booties);
+        subscriber(lang);
     }
 }
 
-store.getBooties = () => {
+store.getBooties = () => {        
     return store.booties;
 }
+
+store.getLanguage = () => {    
+    return store.language;
+}
+
+
 
 // A subscribing function should be ready to
 // receive the changes and react on them
 store.subscribeToChanges = (func) => {
-    // Add subscribing function
+    // Add subscribing function    
     subscribingFunctions.push(func);
 }
 

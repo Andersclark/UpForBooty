@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import store from '../store';
 
 export default class TimezoneDropdown extends Component {
     constructor(props) {
@@ -10,14 +11,25 @@ export default class TimezoneDropdown extends Component {
             isOpen1: false,
             isOpen2: false,
             start: 'Start',
-            end: 'End'
+            end: 'End',
+            language: store.getLanguage()
         };
 
         this.toggle1 = this.toggle1.bind(this);
         this.toggle2 = this.toggle2.bind(this);
     }
 
-
+    componentDidMount() {
+        this._isMounted = true;
+        //the method to react on store changes
+        this.languageChange = (lang) => this.setState({ language: lang });
+        //subscribe to store 
+        store.subscribeToChanges(this.languageChange)
+      }
+      componentWillUnmount() {
+        this._isMounted = false;
+        store.unsubscribeToChanges(this.languageChange);
+      }
 
     onChange = (event) => {
         let newRange = [];
@@ -83,12 +95,12 @@ export default class TimezoneDropdown extends Component {
         return (
             <div>
                 <Dropdown isOpen={this.state.isOpen1} toggle={this.toggle1}>
-                    <DropdownToggle caret>{this.state.start}</DropdownToggle>
+                    <DropdownToggle caret>{this.state.start === 'Start' ? this.state.language === 'eng' ? 'Start' : 'Börjar' : this.state.start}</DropdownToggle>
                     <DropdownMenu>{this.startTimeList()}</DropdownMenu>
                 </Dropdown>
 
                 <Dropdown isOpen={this.state.isOpen2} toggle={this.toggle2}>
-                    <DropdownToggle caret>{this.state.end}</DropdownToggle>
+                    <DropdownToggle caret>{this.state.end === 'End' ? this.state.language === 'eng' ? 'End' : 'Slutar' : this.state.end}</DropdownToggle>
                     <DropdownMenu>{this.endTimeList()}</DropdownMenu>
                 </Dropdown>
             </div>
