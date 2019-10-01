@@ -115,14 +115,19 @@ export default class AddBooty extends Component {
     //if props came from the edit booty component, then send an update request, else add a new booty
     if (this.props.indivBooty) {
       axios.put('http://localhost:5000/booty/update/' + this.props.indivBooty._id, booty)
-        .then(res => console.log(res.data));
+        .then(res => {
+          console.log(res.data)
+          this.setState({ toHomePage: true })
+        });
     }
     else {
       axios.post('http://localhost:5000/booty/add', booty)
-        .then(res => console.log(res.data));
+        .then(res => {
+          console.log(res.data)
+          this.setState({ toHomePage: true })
+        });
     }
 
-    this.setState({toHomePage: true})
   }
 
   render() {
