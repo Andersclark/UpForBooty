@@ -192,17 +192,6 @@ export default class AddBooty extends Component {
           </Col>
 
           <Row form>
-            <Col>
-              <FormGroup>
-                <Label>Country: </Label>
-                <Input type="text" required name="country" className="form-control"
-                  value={this.state.country}
-                  onChange={(e) => {
-                    this.onChangeHandler(e)
-                  }}
-                />
-              </FormGroup>
-            </Col>
 
             <Col md={6}>
               <FormGroup>
@@ -218,13 +207,13 @@ export default class AddBooty extends Component {
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label>Sleeping: </Label>
+                <Label>{this.state.language === 'eng' ? 'Sleeping:' : 'Sover:'}</Label>
                 <TimeDropdown timeDropdownCallback={this.sleepTimeDropdownCallback}  />
               </FormGroup>
             </Col>
              <Col md={6}>
               <FormGroup>
-              <Label>Working: </Label>
+              <Label>{this.state.language === 'eng' ? 'Working:' : 'Arbetar:'}</Label>
                 <TimeDropdown timeDropdownCallback={this.workTimeDropdownCallback}/>
               </FormGroup>
             </Col> 
