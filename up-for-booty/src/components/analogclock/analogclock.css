@@ -1,6 +1,6 @@
 .clockface {
   border-radius: 50%;
-  background: #fff url(ios_clock.svg) no-repeat center;
+  background: url(clockface.svg) no-repeat center;
   background-size: 88%;
   height: 20em;
   padding-bottom: 31%;
@@ -33,7 +33,7 @@
 }
 
 .hourhand{
-  background: red;
+  background: yellow;
   height: 20%;
   left: 48.75%;
   position: absolute;
