@@ -166,7 +166,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <SearchField searchCallback={this.searchCallback} ></SearchField>
-                <Slider sliderCallback={this.sliderCallback} />
+                <Slider className="bootyslider" sliderCallback={this.sliderCallback} />
                 <SortBtn search={this.state.search} sortCallback={this.sortCallback} />
                 <BootyList list={this.state.listToDisplay} ></BootyList>
             </div>

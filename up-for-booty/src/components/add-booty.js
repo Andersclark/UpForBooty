@@ -158,7 +158,7 @@ export default class AddBooty extends Component {
     }
     return (
       <Container className="App">
-        <h2 className="logo">{this.props.indivBooty ? this.state.language === 'eng' ? 'Edit a booty' : 'Redigera en booty' : this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</h2>
+        <h3 className="bootyheader">{this.props.indivBooty ? this.state.language === 'eng' ? 'Edit a booty' : 'Redigera en booty' : this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</h3>
 
         <Form className="form" onSubmit={(e) => this.onSubmit(e)}>
           <Row form>

@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Icon from './icon';
 import store from '../store';
-
+import { Link } from 'react-router-dom';
+import {
+  Row, Col, Card, CardImg, CardBody,
+  CardTitle, CardSubtitle,
+} from 'reactstrap';
+// {"http://localhost:5000/img/" + props.booty.picture + ".jpg"}
 const Booty = props => (
-  <tr>
-    <td>{props.booty.firstName} {props.booty.lastName}</td>
-    <td>{props.booty.timezone}</td>
-    <td>{props.booty.time.format("HH:mm")}</td>
-    <Icon status = {props.booty.status} ></Icon>
-    <td>
-      <Link to={"/view/" + props.booty._id}>Info</Link>
-    </td>
-  </tr>
+      <Col sm="6" lg="3">
+        <Link color="black" textDecoration="none" to={"/view/" + props.booty._id}>
+        <Card sm="6" lg="3" className="bootycard">
+            <CardImg top className="bootycardimg" src="https://images-na.ssl-images-amazon.com/images/I/91ijGd%2BdwZL._SY606_.jpg" alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
+            <CardBody>
+              <CardTitle><h3 className="bootycardheader">{props.booty.firstName} {props.booty.lastName}</h3></CardTitle>
+              <CardSubtitle><i>{props.booty.timezone}</i> <i>{props.booty.time.format("HH:mm")}</i></CardSubtitle>  
+            </CardBody>
+          </Card> 
+          </Link>
+      </Col>
 )
 
 export default class BootyList extends Component {
@@ -31,7 +36,7 @@ export default class BootyList extends Component {
     this._isMounted = true;
     //the method to react on store changes
     this.languageChange = (lang) => this.setState({ language: lang });
-    //subscribe to store 
+    //subscribe to store
     store.subscribeToChanges(this.languageChange)
   }
   componentWillUnmount() {
@@ -41,22 +46,9 @@ export default class BootyList extends Component {
 
   render() {
     return (
-      <div>
-        <h3 className="logo">{this.state.language === 'eng' ? 'Booty List' : 'Bootylista'}</h3>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th className="logo">{this.state.language === 'eng' ? 'Name' : 'Namn'}</th>
-              <th className="logo">{this.state.language === 'eng' ? 'Timezone' : 'Tidszon'}</th>
-              <th className="logo">{this.state.language === 'eng' ? 'Local time' : 'Lokaltid'}</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
+        <Row>
             { this.bootyList() }
-          </tbody>
-        </table>
-      </div>
+        </Row>
     )
   }
 }

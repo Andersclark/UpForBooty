@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, Nav, NavItem, NavLink } from 'reactstrap';
 import store from "../store";
 import { Button, ButtonGroup } from 'reactstrap';
 
+export default class Bootymenu extends Component {
 
-export default class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { language: store.getLanguage() };
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = { 
+        language: store.getLanguage(),
+        collapsed: true,
+        fixed: true,
+        };
   }
   componentDidMount() {
     this._isMounted = true;
@@ -20,26 +25,33 @@ export default class Navbar extends Component {
     this._isMounted = false;
     store.unsubscribeToChanges(this.languageChange);
   }
-
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  }
   render() {
     return (
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand logo" id="bold">BOOTY</Link>
-        <div className="collpase navbar-collapse">
-          <ul className="navbar-nav mr-auto">
-            <li className="navbar-item">
-              <Link to="/" className="nav-link logo">Booties</Link>
-            </li>
-            <li className="navbar-item">
-              <Link to="/add" className="nav-link logo">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</Link>
-            </li>
-          </ul>
-        </div>
-        <ButtonGroup>
-          <Button onClick={() => store.setLanguage('eng')}>English</Button>
-          <Button onClick={() => store.setLanguage('sve')}>Svenska</Button>
-        </ButtonGroup>
-      </nav>
+      <Navbar expand="md"  fixed={`top`} color="info" dark>
+      <NavbarBrand href="/"><i className="fas fa-heart fontawesome bootyheart"></i> <span className="bootynavheader">UpForBooty</span></NavbarBrand>
+        <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+          <Collapse isOpen={!this.state.collapsed} navbar>
+          <Nav navbar>
+            <NavItem>
+                <NavLink href="/about">About</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink className="nav-link logo" href="/add">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
+            </NavItem>
+            <ButtonGroup>
+            <Button onClick={() => store.setLanguage('eng')}>English</Button>
+            <Button onClick={() => store.setLanguage('sve')}>Svenska</Button>
+          </ButtonGroup>
+            </Nav>
+          </Collapse>
+          
+      </Navbar>
+        
     );
   }
 }
