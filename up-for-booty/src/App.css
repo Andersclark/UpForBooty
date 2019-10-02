@@ -52,10 +52,6 @@ a:active {
   height: 25px;
 }
 
-.languageSelector {
-  float: right;
-}
-
 .colStyle.col {
   padding-right: 0;
   padding-left: 0;
@@ -108,6 +104,16 @@ a:active {
   color: white;
   margin-top: 10%;
   font-weight: 900;
+}
+
+.fontawesomeDetails {
+  color: black;
+  padding-top: 2vh;
+  padding-right: 1vw;
+}
+
+.blackText {
+  color: black;
 }
 
 .bootyheart {
