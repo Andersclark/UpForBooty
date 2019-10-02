@@ -224,7 +224,7 @@ export default class AddBooty extends Component {
           </Col>
 
           <FormGroup>
-                <Label>City: </Label>
+                <Label>{this.state.language === 'eng' ? 'City:' : 'Stad:'}</Label>
                 <Input type="text" required name="city" className="form-control"
                   value={this.state.city}
                   onChange={(e) => {this.onCityChange(e)}}
