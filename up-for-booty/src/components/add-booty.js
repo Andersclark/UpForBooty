@@ -56,7 +56,7 @@ export default class AddBooty extends Component {
         skypeHandle: this.props.indivBooty.skypeHandle,
         email: this.props.indivBooty.email,
         city: this.props.indivBooty.city,
-        timezone: this.props.indivBooty.timezone,
+        timezone: this.props.indivBooty.timezone
       });
     };
   }

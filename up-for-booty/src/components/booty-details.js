@@ -19,7 +19,7 @@ export default class BootyDetails extends Component {
         console.log(error);
       })
 
-      this._isMounted = true;
+    this._isMounted = true;
     //the method to react on store changes
     this.languageChange = (lang) => this.setState({ language: lang });
     //subscribe to store 
@@ -30,16 +30,16 @@ export default class BootyDetails extends Component {
     store.unsubscribeToChanges(this.languageChange);
   }
 
-  displayWorkTimes(){
-    if(this.state.booty.atWorkTimes && this.state.booty.atWorkTimes.length > 0){
-      let timeToDisplay = this.state.booty.atWorkTimes[0]+':00 - '+ this.state.booty.atWorkTimes[1]+':00' 
+  displayWorkTimes() {
+    if (this.state.booty.atWorkTimes && this.state.booty.atWorkTimes.length > 0) {
+      let timeToDisplay = this.state.booty.atWorkTimes[0] + ':00 - ' + this.state.booty.atWorkTimes[1] + ':00'
       return <p><i className="fas fa-briefcase fontawesome"></i>Working Hours: {timeToDisplay}</p>
     }
   }
 
-  displaySleepTimes(){
-    if(this.state.booty.asleepTimes && this.state.booty.asleepTimes.length > 0){
-      let timeToDisplay = this.state.booty.asleepTimes[0]+':00 - '+ this.state.booty.asleepTimes[1]+':00'
+  displaySleepTimes() {
+    if (this.state.booty.asleepTimes && this.state.booty.asleepTimes.length > 0) {
+      let timeToDisplay = this.state.booty.asleepTimes[0] + ':00 - ' + this.state.booty.asleepTimes[1] + ':00'
       return <p><i className="fas fa-bed fontawesome"></i>Sleeping Hours: {timeToDisplay}</p>
     }
   }
@@ -54,6 +54,8 @@ export default class BootyDetails extends Component {
           <p><i className="far fa-envelope-open fontawesome"></i>{this.state.language === 'eng' ? 'Email: ' : 'E-postadress: '} {this.state.booty.email}</p>
           <p><i className="fas fa-home fontawesome"></i>{this.state.language === 'eng' ? 'City: ' : 'Stad: '} {this.state.booty.city}</p>
           <p><i className="fas fa-clock fontawesome"></i>{this.state.language === 'eng' ? 'Timezone: ' : 'Tidszon: '} {this.state.booty.timezone}</p>
+          {this.displayWorkTimes()}
+          {this.displaySleepTimes()}
           <Link to={"/edit/" + this.state.booty._id}>{this.state.language === 'eng' ? 'Edit' : 'Redigera'}</Link>
         </div>
       </div>
