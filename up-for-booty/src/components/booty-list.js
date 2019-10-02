@@ -33,7 +33,6 @@ export default class BootyList extends Component {
   } 
 
   componentDidMount() {
-    console.log(this.bootyList)
     this._isMounted = true;
     //the method to react on store changes
     this.languageChange = (lang) => this.setState({ language: lang });
