@@ -6,7 +6,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 const Person = require('./models/Booty');
-const dbReset = true;
+const dbReset = false;
 const app = express();
 app.use(express.json());
 
@@ -30,6 +30,9 @@ db.once('open', () => {
 
 const bootyRouter = require('./routes/booty');
 app.use('/booty', bootyRouter);
+
+const googleRouter = require('./routes/googlemapsapi');
+app.use('/place', googleRouter);
 
 app.listen(5000, () => {
   console.log(' Server is running on port: 5000');
