@@ -16,16 +16,16 @@ global.db = mongoose.connection;
 
 db.on('error', () => console.log('Could not connect to DB'));
 db.once('open', () => {
-    console.log('Connected to DB');
+  console.log('Connected to DB');
 
-    if(dbReset){
-      console.log('Cleaning DB...')
-      Person.deleteMany({}, function (err) {});
-      console.log('Batch-inserting mock-data...')
-      const mockdata = require('./mockdata.json')
-      Person.insertMany(mockdata);
-      console.log('Database reset complete!')
-    }
+  if (dbReset) {
+    console.log('Cleaning DB...')
+    Person.deleteMany({}, function (err) { });
+    console.log('Batch-inserting mock-data...')
+    const mockdata = require('./mockdata.json')
+    Person.insertMany(mockdata);
+    console.log('Database reset complete!')
+  }
 });
 
 const bootyRouter = require('./routes/booty');
