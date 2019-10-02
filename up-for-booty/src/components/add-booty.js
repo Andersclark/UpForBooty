@@ -35,16 +35,13 @@ export default class AddBooty extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    //the method to react on store changes
     this.languageChange = (lang) => this.setState({ language: lang });
-    //subscribe to store 
     store.subscribeToChanges(this.languageChange)
   }
   componentWillUnmount() {
     this._isMounted = false;
     store.unsubscribeToChanges(this.languageChange);
   }
-
 
   componentDidUpdate(nextProps) {
     if (nextProps.indivBooty !== this.props.indivBooty) {
@@ -67,29 +64,21 @@ export default class AddBooty extends Component {
   }
 
 
- onCityChange(event){
+  onCityChange(event) {
     console.log('oncitychange')
     let city = event.target.value;
-    this.setState({'city': city});
+    this.setState({ 'city': city });
     clearTimeout(this.timeout);
     let timezone = '';
-    let self= this;
-    
-    this.timeout = setTimeout(async function(){
+    let self = this;
+
+    this.timeout = setTimeout(async function () {
       timezone = await axios.get('http://localhost:5000/place/time/' + city)
       console.log(timezone.data);
-      self.setState({timezone: timezone.data})
+      self.setState({ timezone: timezone.data })
     }, 2000);
   }
-    
-      //  this.setState({ 'timezone': timezone }))}
 
-  /* 
-  getTimezone(city){
-  axios.get('http://localhost:5000/place/time/' + city)
-    .then(response => {
-      console.log(response)})}
- */
   validateEmail(e) {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const { validate } = this.state;
@@ -105,17 +94,16 @@ export default class AddBooty extends Component {
     const { validate } = this.state;
     if (phoneRegex.test(e.target.value)) {
       validate.phoneNoState = 'has-success'
-    }
-    else {
+    } else {
       validate.phoneNoState = 'has-fail'
     }
   }
 
   sleepTimeDropdownCallback = (timeRange) => {
-    this.setState({sleepRange: timeRange})
+    this.setState({ sleepRange: timeRange })
   }
-  workTimeDropdownCallback = (timeRange) => {    
-    this.setState({workRange: timeRange})
+  workTimeDropdownCallback = (timeRange) => {
+    this.setState({ workRange: timeRange })
   }
 
   onSubmit(e) {
@@ -141,15 +129,13 @@ export default class AddBooty extends Component {
           console.log(res.data)
           this.setState({ toHomePage: true })
         });
-    }
-    else {
+    } else {
       axios.post('http://localhost:5000/booty/add', booty)
         .then(res => {
           console.log(res.data)
           this.setState({ toHomePage: true })
         });
     }
-
   }
 
   render() {
@@ -183,15 +169,32 @@ export default class AddBooty extends Component {
             </Col>
           </Row>
 
-          <Col className="colStyle">
-            <FormGroup>
-              <Label>Skype</Label>
-              <Input type="text" required name="skypeHandle" className="form-control"
-                value={this.state.skypeHandle}
-                onChange={this.onChangeHandler}
-              />
-            </FormGroup>
-          </Col>
+          <Row form>
+            <Col className="colStyle">
+              <FormGroup>
+                <Label>Skype</Label>
+                <Input type="text" required name="skypeHandle" className="form-control"
+                  value={this.state.skypeHandle}
+                  onChange={this.onChangeHandler}
+                />
+              </FormGroup>
+            </Col>
+
+            <Col className="colStyle">
+              <FormGroup>
+                <Label>{this.state.language === 'eng' ? 'Phone number:' : 'Telefonnummer:'}</Label>
+                <Input type="text" required name="phoneNo" className="form-control"
+                  value={this.state.phoneNo}
+                  valid={this.state.validate.phoneNoState === 'has-success'}
+                  invalid={this.state.validate.phoneNoState === 'has-fail'}
+                  onChange={(e) => {
+                    this.validatePhoneNo(e)
+                    this.onChangeHandler(e)
+                  }}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
           <Col className="colStyle">
             <FormGroup>
@@ -208,43 +211,28 @@ export default class AddBooty extends Component {
             </FormGroup>
           </Col>
 
-          <Col className="colStyle">
-            <FormGroup>
-              <Label>{this.state.language === 'eng' ? 'Phone number:' : 'Telefonnummer:'}</Label>
-              <Input type="text" required name="phoneNo" className="form-control"
-                value={this.state.phoneNo}
-                valid={this.state.validate.phoneNoState === 'has-success'}
-                invalid={this.state.validate.phoneNoState === 'has-fail'}
-                onChange={(e) => {
-                  this.validatePhoneNo(e)
-                  this.onChangeHandler(e)
-                }}
-              />
-            </FormGroup>
-          </Col>
-
           <FormGroup>
-                <Label>{this.state.language === 'eng' ? 'City:' : 'Stad:'}</Label>
-                <Input type="text" required name="city" className="form-control"
-                  value={this.state.city}
-                  onChange={(e) => {this.onCityChange(e)}}
-                />
-                <p>Timezone: {this.state.timezone}</p>
-              </FormGroup>
+            <Label>{this.state.language === 'eng' ? 'City:' : 'Stad:'}</Label>
+            <Input type="text" required name="city" className="form-control"
+              value={this.state.city}
+              onChange={(e) => { this.onCityChange(e) }}
+            />
+            <p>Timezone: {this.state.timezone}</p>
+          </FormGroup>
 
           <Row>
             <Col md={6}>
               <FormGroup>
                 <Label>{this.state.language === 'eng' ? 'Sleeping:' : 'Sover:'}</Label>
-                <TimeDropdown timeDropdownCallback={this.sleepTimeDropdownCallback}  />
+                <TimeDropdown timeDropdownCallback={this.sleepTimeDropdownCallback} />
               </FormGroup>
             </Col>
-             <Col md={6}>
+            <Col md={6}>
               <FormGroup>
-              <Label>{this.state.language === 'eng' ? 'Working:' : 'Arbetar:'}</Label>
-                <TimeDropdown timeDropdownCallback={this.workTimeDropdownCallback}/>
+                <Label>{this.state.language === 'eng' ? 'Working:' : 'Arbetar:'}</Label>
+                <TimeDropdown timeDropdownCallback={this.workTimeDropdownCallback} />
               </FormGroup>
-            </Col> 
+            </Col>
           </Row>
 
           <Button>{this.state.language === 'eng' ? 'Submit' : 'Godkänn'}</Button>

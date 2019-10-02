@@ -14,18 +14,16 @@ export default class TimezoneDropdown extends Component {
             end: 'End',
             language: store.getLanguage()
         };
-
         this.toggle1 = this.toggle1.bind(this);
         this.toggle2 = this.toggle2.bind(this);
     }
 
     componentDidMount() {
         this._isMounted = true;
-        //the method to react on store changes
         this.languageChange = (lang) => this.setState({ language: lang });
-        //subscribe to store 
         store.subscribeToChanges(this.languageChange)
       }
+
       componentWillUnmount() {
         this._isMounted = false;
         store.unsubscribeToChanges(this.languageChange);

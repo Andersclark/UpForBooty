@@ -8,7 +8,7 @@ import {
 // {"http://localhost:5000/img/" + props.booty.picture + ".jpg"}
 const Booty = props => (
       <Col sm="6" lg="3">
-        <Link color="black" textDecoration="none" to={"/view/" + props.booty._id}>
+        <Link to={"/view/" + props.booty._id}>
         <Card sm="6" lg="3" className="bootycard">
             <CardImg top className="bootycardimg" src="https://images-na.ssl-images-amazon.com/images/I/91ijGd%2BdwZL._SY606_.jpg" alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
             <CardBody>

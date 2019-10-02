@@ -11,6 +11,7 @@ Link{
 
 a {
   text-decoration: none;
+  color: black;
 }
 a:hover {
   text-decoration: none;
@@ -30,7 +31,7 @@ a:active {
 }
 
 .bootyapp {
-  padding-top: 20%;
+  padding-top: 10%;
   padding-left: 5%;
   padding-right: 5%;
   background: linear-gradient(purple, yellow);
@@ -38,11 +39,35 @@ a:active {
   background-attachment: fixed;
 }
 
+.btn.btn-secondary {
+  background-color: #17a2b8;
+  color: #fff;
+  border-color: #117b8b;
+  margin-bottom: 2vh;
+}
+
+/*Language selector*/
+.flagStyle {
+  width: 25px;
+  height: 25px;
+}
+
+.languageSelector {
+  float: right;
+}
+
+.colStyle.col {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .bootycard {
   margin: 2%;
   padding: 2%;
   min-height: 30vh;
+  color: black;
 }
+
 .bootycardheader {
   margin-top: 2%;
   font-weight: 700;
