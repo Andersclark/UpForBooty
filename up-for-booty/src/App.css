@@ -31,7 +31,7 @@ a:active {
 }
 
 .bootyapp {
-  padding-top: 10%;
+  padding-top: 15%;
   padding-left: 5%;
   padding-right: 5%;
   background: linear-gradient(purple, yellow);
@@ -44,6 +44,17 @@ a:active {
   color: #fff;
   border-color: #117b8b;
   margin-bottom: 2vh;
+}
+
+.rc-slider.sliderWidth {
+  width: 70vw;
+  margin: auto;
+}
+
+label.fuckThis {
+  text-align: center;
+  width: 90vw;
+  padding: 1em;
 }
 
 /*Language selector*/
@@ -83,6 +94,7 @@ a:active {
 .searchfield {
   margin-left: 10%;
   margin-right: 10%;
+  width: 40vw;
 }
 
 .bootyslider {
@@ -92,7 +104,7 @@ a:active {
 
 .bootyheader {
   color: white;
-  margin-top: 10%;
+  margin-top: 2%;
   font-weight: 700;
 }
 .bootydetailsheader {
