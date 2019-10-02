@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Input } from 'reactstrap';
 import store from '../store';
 
 export default class SearchField extends Component {
@@ -23,7 +23,6 @@ export default class SearchField extends Component {
             <div className="searchfield">
                 <Form onSubmit={(e) => e.preventDefault()}  >
                     <FormGroup>
-                        <Label className="logo" id="bold">{this.state.language === 'eng' ? 'Search' : 'Sök'}</Label>
                         <Input
                             type="search"
                             name="search"

@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import store from '../store';
+import { Link } from 'react-router-dom';
 import {
-  Row, Col, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button
+  Row, Col, Card, CardImg, CardBody,
+  CardTitle, CardSubtitle,
 } from 'reactstrap';
-
+// {"http://localhost:5000/img/" + props.booty.picture + ".jpg"}
 const Booty = props => (
-
       <Col sm="6" lg="3">
+        <Link color="black" textDecoration="none" to={"/view/" + props.booty._id}>
         <Card sm="6" lg="3" className="bootycard">
-            <CardImg top width="100%" height="40%" src={"http://localhost:5000/img/" + props.booty.picture + ".jpg"} alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
+            <CardImg top className="bootycardimg" src="https://images-na.ssl-images-amazon.com/images/I/91ijGd%2BdwZL._SY606_.jpg" alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
             <CardBody>
               <CardTitle><h3 className="bootycardheader">{props.booty.firstName} {props.booty.lastName}</h3></CardTitle>
-              <CardSubtitle><i>Location: {props.booty.timezone}</i></CardSubtitle>
-              <CardSubtitle><i>Local time: {props.booty.time.format("HH:mm")}</i></CardSubtitle>
-              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-              <Button color="info" route={"/view/" + props.booty._id}>View details</Button>
-              
-          
+              <CardSubtitle><i>{props.booty.timezone}</i> <i>{props.booty.time.format("HH:mm")}</i></CardSubtitle>  
             </CardBody>
           </Card> 
+          </Link>
       </Col>
 )
 
@@ -36,10 +33,11 @@ export default class BootyList extends Component {
   } 
 
   componentDidMount() {
+    console.log(this.bootyList)
     this._isMounted = true;
     //the method to react on store changes
     this.languageChange = (lang) => this.setState({ language: lang });
-    //subscribe to store 
+    //subscribe to store
     store.subscribeToChanges(this.languageChange)
   }
   componentWillUnmount() {

@@ -43,12 +43,13 @@ export default class Bootymenu extends Component {
             <NavItem>
                 <NavLink className="nav-link logo" href="/add">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
             </NavItem>
-            </Nav>
-          </Collapse>
-          <ButtonGroup>
+            <ButtonGroup>
             <Button onClick={() => store.setLanguage('eng')}>English</Button>
             <Button onClick={() => store.setLanguage('sve')}>Svenska</Button>
           </ButtonGroup>
+            </Nav>
+          </Collapse>
+          
       </Navbar>
         
     );
