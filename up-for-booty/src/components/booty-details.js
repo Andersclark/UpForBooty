@@ -35,14 +35,14 @@ export default class BootyDetails extends Component {
   displayWorkTimes() {
     if (this.state.booty.atWorkTimes && this.state.booty.atWorkTimes.length > 0) {
       let timeToDisplay = this.state.booty.atWorkTimes[0] + ':00 - ' + this.state.booty.atWorkTimes[1] + ':00'
-      return <p><i className="fas fa-briefcase fontawesome"></i>Working Hours: {timeToDisplay}</p>
+      return <p className="pMargin"><i className="fas fa-briefcase fontawesomeDetails"></i>Working Hours: {timeToDisplay}</p>
     }
   }
 
   displaySleepTimes() {
     if (this.state.booty.asleepTimes && this.state.booty.asleepTimes.length > 0) {
       let timeToDisplay = this.state.booty.asleepTimes[0] + ':00 - ' + this.state.booty.asleepTimes[1] + ':00'
-      return <p><i className="fas fa-bed fontawesome"></i>Sleeping Hours: {timeToDisplay}</p>
+      return <p className="pMargin"><i className="fas fa-bed fontawesomeDetails"></i>Sleeping Hours: {timeToDisplay}</p>
     }
   }
 
