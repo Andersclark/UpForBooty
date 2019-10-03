@@ -30,7 +30,7 @@ export default class SortBtn extends Component {
             <div>
                 <h3 className="bootyheader" id="bold">{this.state.language === 'eng' ? 'Sort by: ' : 'Sortera efter: '}</h3>
                 <ButtonGroup>                   
-                    {this.props.search && <Button onClick={() => this.onRadioBtnClick('SEARCH')} active={this.state.sortBy === 'SEARCH' }>{this.state.language === 'eng' ? 'Top Results' : 'Bästa Sökresultat'}</Button>}
+                    {this.props.search && <Button color="info"  onClick={() => this.onRadioBtnClick('SEARCH')} active={this.state.sortBy === 'SEARCH' }>{this.state.language === 'eng' ? 'Top Results' : 'Bästa Sökresultat'}</Button>}
                     <Button color="info" onClick={() => this.onRadioBtnClick('FIRST_NAME')} active={this.state.sortBy === 'FIRST_NAME'}>{this.state.language === 'eng' ? 'First name' : 'Förnamn'}</Button>
                     <Button color="info" onClick={() => this.onRadioBtnClick('LAST_NAME')} active={this.state.sortBy === 'LAST_NAME'}>{this.state.language === 'eng' ? 'Last name' : 'Efternamn'}</Button>
                     <Button color="info" onClick={() => this.onRadioBtnClick('AVAILABILITY')} active={this.state.sortBy === 'AVAILABILITY'}>{this.state.language === 'eng' ? 'Availability' : 'Tillgänglighet'}</Button>
