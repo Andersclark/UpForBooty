@@ -42,7 +42,7 @@ export default class Bootymenu extends Component {
           <Nav navbar>
             <NavItem>
               <Link to="/add" >
-                <NavLink className="nav-link logo" >{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
+                <NavLink className="nav-link logo">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
               </Link>
             </NavItem>
             <ButtonGroup className="mr-auto">
