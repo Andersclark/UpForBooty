@@ -52,7 +52,7 @@ export default class BootyDetails extends Component {
         <Col sm="3" md="3"></Col>
         <Col sm="6" md="5">
           <Card className="bootycard">
-            <CardImg top width="100%" height="40%" src="https://1.bp.blogspot.com/-1uQRYMklACU/ToQ6aL-5uUI/AAAAAAAAAgQ/9_u0922cL14/s1600/cute-puppy-dog-wallpapers.jpg" />
+            <CardImg top width="100%" height="40%" src={'http://localhost:5000/public/img/' + this.state.booty.picture + '.jpg'} />
             <CardBody>
               <CardTitle><h3 className="bootydetailsheader">{this.state.booty.firstName} {this.state.booty.lastName}</h3></CardTitle>
               <CardText>
