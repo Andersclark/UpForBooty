@@ -9,9 +9,7 @@ export default class SearchField extends Component {
     }
     componentDidMount() {
         this._isMounted = true;
-        //the method to react on store changes
         this.languageChange = (lang) => this.setState({ language: lang });
-        //subscribe to store 
         store.subscribeToChanges(this.languageChange)
     }
     componentWillUnmount() {
