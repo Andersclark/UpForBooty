@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarBrand, NavbarToggler, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, Nav, NavItem, NavLink, Button, ButtonGroup } from 'reactstrap';
 import store from "../store";
-import { Button, ButtonGroup } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 export default class Bootymenu extends Component {
 
@@ -33,25 +34,24 @@ export default class Bootymenu extends Component {
   render() {
     return (
       <Navbar expand="md" fixed={`top`} color="info" dark>
-        <NavbarBrand href="/"><i className="fas fa-heart fontawesome bootyheart"></i> <span className="bootynavheader">UpForBooty</span></NavbarBrand>
+        <Link to="/">
+          <NavbarBrand ><i className="fas fa-heart fontawesome bootyheart"></i> <span className="bootynavheader">UpForBooty</span></NavbarBrand>
+        </Link>
         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
         <Collapse isOpen={!this.state.collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink href="/about">About</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="nav-link logo" href="/add">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
+              <Link to="/add" >
+                <NavLink className="nav-link logo" >{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
+              </Link>
             </NavItem>
             <ButtonGroup className="mr-auto">
-              <Button onClick={() => store.setLanguage('eng')}><img src='/engFlag.png' className="flagStyle" alt="american flag"/></Button>
-              <Button onClick={() => store.setLanguage('sve')}><img src='/sweFlag.png' className="flagStyle" alt="swedish flag"/></Button>
+              <Button onClick={() => store.setLanguage('eng')}><img src='/engFlag.png' className="flagStyle" alt="american flag" /></Button>
+              <Button onClick={() => store.setLanguage('sve')}><img src='/sweFlag.png' className="flagStyle" alt="swedish flag" /></Button>
             </ButtonGroup>
           </Nav>
         </Collapse>
-
       </Navbar>
-
     );
   }
 }
