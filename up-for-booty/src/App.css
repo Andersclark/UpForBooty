@@ -49,6 +49,14 @@ a:active {
   margin-bottom: 2vh;
 }
 
+.editBtn {
+  margin-top: 1em;
+}
+
+.linkColor {
+  color: white;
+}
+
 .rc-slider.sliderWidth {
   width: 70vw;
   margin: auto;

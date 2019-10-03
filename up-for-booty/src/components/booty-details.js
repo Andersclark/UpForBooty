@@ -3,9 +3,9 @@ import axios from 'axios';
 import store from '../store';
 import {
   Row, Col, Card, CardImg, CardText, CardBody,
-  CardTitle,
+  CardTitle, Button
 } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 
 export default class BootyDetails extends Component {
   constructor(props) {
@@ -63,6 +63,7 @@ export default class BootyDetails extends Component {
                 <br></br> <i className="fas fa-clock fontawesomeDetails"></i>  {this.state.language === 'eng' ? 'Timezone: ' : 'Tidszon: '} {this.state.booty.timezone}
                 {this.displayWorkTimes()}
                 {this.displaySleepTimes()}
+                <Button className="editBtn"><Link to={"/edit/" + this.state.booty._id} className="linkColor">{this.state.language === 'eng' ? 'Edit' : 'Redigera'}</Link></Button>
               </CardText>
             </CardBody>
           </Card>
