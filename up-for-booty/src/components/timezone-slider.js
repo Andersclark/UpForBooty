@@ -41,7 +41,7 @@ export default class TimezoneSlider extends Component {
     return (
       <div>
         <Range className="sliderWidth" min={1} max={24} allowCross={false} value={this.state.value} onAfterChange={this.onSliderChange} onChange={this.onSliderChange} tipFormatter={value => `${value}`} />
-        <label className="fuckThis">{this.state.language === 'eng' ? 'Showing booties between ' : 'Visar booties mellan'}{this.state.value[0]}.00 - {this.state.value[1]}.00</label>
+        <label className="centerLabel">{this.state.language === 'eng' ? 'Showing booties between ' : 'Visar booties mellan'}{this.state.value[0]}.00 - {this.state.value[1]}.00</label>
       </div>
     );
   }
