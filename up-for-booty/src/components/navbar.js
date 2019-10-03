@@ -34,16 +34,12 @@ export default class Bootymenu extends Component {
   render() {
     return (
       <Navbar expand="md" fixed={`top`} color="info" dark>
-        <Link to="/">
-          <NavbarBrand ><i className="fas fa-heart fontawesome bootyheart"></i> <span className="bootynavheader">UpForBooty</span></NavbarBrand>
-        </Link>
+        <NavbarBrand tag={Link} to="/"><i className="fas fa-heart fontawesome bootyheart"></i> <span className="bootynavheader">UpForBooty</span></NavbarBrand>
         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
         <Collapse isOpen={!this.state.collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <Link to="/add" >
-                <NavLink className="nav-link logo">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
-              </Link>
+              <NavLink tag={Link} to="/add" className="nav-link logo">{this.state.language === 'eng' ? 'Add a booty' : 'Lägg till en booty'}</NavLink>
             </NavItem>
             <ButtonGroup className="mr-auto">
               <Button onClick={() => store.setLanguage('eng')}><img src='/engFlag.png' className="flagStyle" alt="american flag" /></Button>
