@@ -10,7 +10,7 @@ const Booty = props => (
       <Col sm="6" lg="3">
         <Link to={"/view/" + props.booty._id}>
         <Card sm="6" lg="3" className="bootycard">
-            <CardImg top className="bootycardimg" src="https://images-na.ssl-images-amazon.com/images/I/91ijGd%2BdwZL._SY606_.jpg" alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
+            <CardImg top className="bootycardimg" src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.i-love-pugs.com%2Fimages%2FPugFaceReduced.jpg&f=1&nofb=1" alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'} />
             <CardBody>
               <CardTitle><h3 className="bootycardheader">{props.booty.firstName} {props.booty.lastName}</h3></CardTitle>
               <CardSubtitle><i>{props.booty.timezone}</i> <i>{props.booty.time.format("HH:mm")}</i></CardSubtitle>  
