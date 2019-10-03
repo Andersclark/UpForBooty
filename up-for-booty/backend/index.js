@@ -28,17 +28,14 @@ db.once('open', () => {
   }
 });
 
+app.use('/public', express.static('./public'));
+
 const bootyRouter = require('./routes/booty');
 app.use('/booty', bootyRouter);
 
 const googleRouter = require('./routes/googlemapsapi');
 app.use('/place', googleRouter);
 
-app.use('/img', express.static('./public/img'));
-
 app.listen(5000, () => {
   console.log(' Server is running on port: 5000');
 });
-
-
-
