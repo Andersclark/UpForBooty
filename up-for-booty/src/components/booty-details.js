@@ -34,15 +34,25 @@ export default class BootyDetails extends Component {
 
   displayWorkTimes() {
     if (this.state.booty.atWorkTimes && this.state.booty.atWorkTimes.length > 0) {
-      let timeToDisplay = this.state.booty.atWorkTimes[0] + ':00 - ' + this.state.booty.atWorkTimes[1] + ':00'
-      return <span className="pMargin"><i className="fas fa-briefcase fontawesomeDetails"></i>Working Hours: {timeToDisplay}</span>
+      if (this.state.language === 'eng') {
+        let timeToDisplay = (this.state.booty.atWorkTimes[0] > 12 ? (this.state.booty.atWorkTimes[0] - 12) + ':00 PM - ' : this.state.booty.atWorkTimes[0] + ':00 AM - ') + (this.state.booty.atWorkTimes[1] > 12 ? (this.state.booty.atWorkTimes[1] - 12) + ':00 PM' : this.state.booty.atWorkTimes[1] + ':00 AM')
+        return <span className="pMargin"><i className="fas fa-bed fontawesomeDetails"></i>Working: {timeToDisplay}</span>
+      } else {
+        let timeToDisplay = this.state.booty.atWorkTimes[0] + ':00 - ' + this.state.booty.atWorkTimes[1] + ':00'
+        return <span className="pMargin"><i className="fas fa-bed fontawesomeDetails"></i>Arbetar: {timeToDisplay}</span>
+      };
     }
   }
 
   displaySleepTimes() {
     if (this.state.booty.asleepTimes && this.state.booty.asleepTimes.length > 0) {
-      let timeToDisplay = this.state.booty.asleepTimes[0] + ':00 - ' + this.state.booty.asleepTimes[1] + ':00'
-      return <span className="pMargin"><i className="fas fa-bed fontawesomeDetails"></i>Sleeping Hours: {timeToDisplay}</span>
+      if (this.state.language === 'eng') {
+        let timeToDisplay = (this.state.booty.asleepTimes[0] > 12 ? (this.state.booty.asleepTimes[0] - 12) + ':00 PM - ' : this.state.booty.asleepTimes[0] + ':00 AM - ') + (this.state.booty.asleepTimes[1] > 12 ? (this.state.booty.asleepTimes[1] - 12) + ':00 PM' : this.state.booty.asleepTimes[1] + ':00 AM')
+        return <span className="pMargin"><i className="fas fa-bed fontawesomeDetails"></i>Sleeping: {timeToDisplay}</span>
+      } else {
+        let timeToDisplay = this.state.booty.asleepTimes[0] + ':00 - ' + this.state.booty.asleepTimes[1] + ':00'
+        return <span className="pMargin"><i className="fas fa-bed fontawesomeDetails"></i>Sover: {timeToDisplay}</span>
+      };
     }
   }
 
