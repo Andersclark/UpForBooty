@@ -36,12 +36,22 @@ export default class TimezoneSlider extends Component {
     });
     this.props.sliderCallback(value);
   }
-  
+
+  displaySliderTime() {
+    if (this.state.language === 'eng') {
+      let timeToDisplay = (this.state.value[0] > 12 ? (this.state.value[0] - 12) + ':00 PM - ' : this.state.value[0] + ':00 AM - ') + (this.state.value[1] > 12 ? (this.state.value[1] - 12) + ':00 PM' : this.state.value[1] + ':00 AM')
+      return <label className="centerLabel">Showing booties between {timeToDisplay}</label>
+    } else {
+      let timeToDisplay = this.state.value[0] + ':00 - ' + this.state.value[1] + ':00'
+      return <label className="centerLabel">Visar booties mellan {timeToDisplay}</label>
+    };
+  }
+
   render() {
     return (
       <div>
         <Range className="sliderWidth" min={1} max={24} allowCross={false} value={this.state.value} onAfterChange={this.onSliderChange} onChange={this.onSliderChange} tipFormatter={value => `${value}`} />
-        <label className="centerLabel">{this.state.language === 'eng' ? 'Showing booties between ' : 'Visar booties mellan'}{this.state.value[0]}.00 - {this.state.value[1]}.00</label>
+        {this.displaySliderTime()}
       </div>
     );
   }
