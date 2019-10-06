@@ -1,43 +1,59 @@
 import React, { Component } from 'react';
+import store from '../store';
 import { Link } from 'react-router-dom';
-
+import {
+  Row, Col, Card, CardImg, CardBody,
+  CardTitle, CardSubtitle,
+} from 'reactstrap';
+import Icon from './icon';
+// {"http://localhost:5000/img/" + props.booty.picture + ".jpg"}
 const Booty = props => (
-  <tr>
-    <td>{props.booty.firstName} {props.booty.lastName}</td>
-    <td>{props.booty.timezone}</td>
-    <td>{props.booty.time.format("HH:mm")}</td>
-    <td>
-      <Link to={"/view/" + props.booty._id}>View details</Link>
-    </td>
-  </tr>
+  <Col sm="6" lg="3">
+    <Link to={"/view/" + props.booty._id}>
+      <Card sm="6" lg="3" className="bootycard">
+        < CardImg top className="bootycardimg"
+          src={'http://localhost:5000/public/img/' + props.booty.picture + '.jpg'}
+          alt={props.booty.firstName + ' ' + props.booty.lastName + ' profile picture.'}
+        />
+        <CardBody>
+          <Icon status={props.booty.status} ></Icon>
+          <CardTitle><h3 className="bootycardheader">{props.booty.firstName} {props.booty.lastName}</h3></CardTitle>
+          <CardSubtitle><i>{props.booty.timezone}</i> <i>{props.booty.time.format("HH:mm")}</i></CardSubtitle>
+        </CardBody>
+      </Card>
+    </Link>
+  </Col>
 )
 
 export default class BootyList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { language: store.getLanguage() }
+  }
 
   bootyList() {
     return this.props.list.map(currentBooty => {
       return <Booty booty={currentBooty} key={currentBooty._id} />;
     })
-  } 
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+    //the method to react on store changes
+    this.languageChange = (lang) => this.setState({ language: lang });
+    //subscribe to store
+    store.subscribeToChanges(this.languageChange)
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+    store.unsubscribeToChanges(this.languageChange);
+  }
 
   render() {
     return (
-      <div>
-        <h3 className="logo">Booty List</h3>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th className="logo">Name</th>
-              <th className="logo">Timezone</th>
-              <th className="logo">Current local time</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            { this.bootyList() }
-          </tbody>
-        </table>
-      </div>
+      <Row>
+        {this.bootyList()}
+      </Row>
     )
   }
 }

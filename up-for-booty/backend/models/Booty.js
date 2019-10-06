@@ -10,7 +10,10 @@ let bootySchema = new Schema({
     email: String,
     city: String,
     country: String,
-    timezone: String
+    timezone: String,
+    asleepTimes: [Number],
+    atWorkTimes: [Number],
+    picture: String
 });
 
 const Booty = mongoose.model('Booty', bootySchema);
